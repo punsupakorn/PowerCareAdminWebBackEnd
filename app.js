@@ -11,6 +11,7 @@ var RegisRouter = require('./routes/registration');
 var LoginRouter = require('./routes/login');
 var SlotRouter = require('./routes/slot');
 var OfficerRouter = require('./routes/officerlist');
+var AppointmentListRouter = require('./routes/appointmentlist');
 
 var app = express();
 
@@ -30,6 +31,7 @@ app.use('/registration', RegisRouter);
 app.use('/login', LoginRouter);
 app.use('/doctorslot', SlotRouter);
 app.use('/officerlist',OfficerRouter);
+app.use('/appointmentlist',AppointmentListRouter);
 
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {s
