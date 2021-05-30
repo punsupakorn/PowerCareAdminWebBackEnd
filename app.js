@@ -8,15 +8,10 @@ var db = require('./config/firebase_config');
 
 // var indexRouter = require('./routes/index');
 var RegisRouter = require('./routes/registration');
-<<<<<<< HEAD
+
 var SlotRouter = require('./routes/slot');
 var OfficerRouter = require('./routes/officerlist');
 var AppointmentListRouter = require('./routes/appointmentlist');
-=======
-var LoginRouter = require('./routes/login');
-var SlotRouter = require('./routes/slot');
-var OfficerRouter = require('./routes/officerlist');
->>>>>>> main
 
 var app = express();
 
@@ -33,15 +28,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // app.use('/', indexRouter);
 app.use('/registration', RegisRouter);
-<<<<<<< HEAD
 app.use('/doctorslot', SlotRouter);
 app.use('/officerlist',OfficerRouter);
 app.use('/appointmentlist',AppointmentListRouter);
-=======
-app.use('/login', LoginRouter);
-app.use('/doctorslot', SlotRouter);
-app.use('/officerlist',OfficerRouter);
->>>>>>> main
 
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {s
