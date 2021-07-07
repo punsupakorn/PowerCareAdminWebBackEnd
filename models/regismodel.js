@@ -6,7 +6,7 @@ const addAdminRegisDetail = async (
   Phone,
   Position,
   Email,
-  Password
+  Password,
 ) => {
   
   const docAdminRef = await db.collection("Admin").doc();

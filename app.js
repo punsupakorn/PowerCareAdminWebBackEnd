@@ -8,7 +8,6 @@ var db = require('./config/firebase_config');
 
 // var indexRouter = require('./routes/index');
 var RegisRouter = require('./routes/registration');
-
 var SlotRouter = require('./routes/slot');
 var OfficerRouter = require('./routes/officerlist');
 var AppointmentListRouter = require('./routes/appointmentlist');
