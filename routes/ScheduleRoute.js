@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {getAllTimeTable,getTimeInTable} = require('../models/appointmentlistmodel');
+const {getAllTimeTable} = require("../controller/AppointmentListController");
 
 router.get('/',async(req,res)=>{
     let result = await getAllTimeTable()

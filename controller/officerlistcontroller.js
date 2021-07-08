@@ -1,1 +1,3 @@
-const {showAllOfficer} =require('../models/officerlistmodel');
+const {getAllOfficer} =require("../models/OfficerModels");
+
+module.exports = {getAllOfficer};
