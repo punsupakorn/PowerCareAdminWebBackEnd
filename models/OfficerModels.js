@@ -71,4 +71,11 @@ const getDoctor = async () => {
   return arr;
 };
 
+/////========== Update ==========/////
+
+/////========== Delete ==========/////
+const remove = async() => {
+
+}
+
 module.exports = { addAdmin, addDoctor, getAllOfficer, getDoctor };
