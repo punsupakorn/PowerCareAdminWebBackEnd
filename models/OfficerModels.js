@@ -74,10 +74,19 @@ const getDoctor = async () => {
 /////========== Update ==========/////
 
 /////========== Delete ==========/////
+const deleteDoctor = async (document) => {
+  db.collection("Doctor").doc(document).delete();
+};
+
+const deleteAdmin = async (document) => {
+  db.collection("Admin").doc(document).delete();
+};
 
 module.exports = {
   addAdmin,
   addDoctor,
   getAllOfficer,
   getDoctor,
+  deleteDoctor,
+  deleteAdmin
 };
