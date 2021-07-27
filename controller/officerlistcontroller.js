@@ -5,16 +5,18 @@ const {
 } = require("../models/OfficerModels");
 
 const deleteOfficer = async (req, res) => {
-  const document = req.body.document;
-  const position = req.body.position;
+  const DocumentID = req.body.DocumentID;
+  const Position = req.body.Position;
   try {
-    if (position == "Doctor") {
-      deleteDoctor(document);
+    if (Position == "Doctor") {
+      deleteDoctor(DocumentID);
       res.status(200);
+      //res.json({result:"delete doctor success!"})
       console.log("delete doctor success!");
-    } else if (position == "Admin") {
-      deleteAdmin(document);
+    } else if (Position == "Admin") {
+      deleteAdmin(DocumentID);
       res.status(200);
+      //res.json({result:"delete admin success!"})
       console.log("delete admin success!");
     }
   } catch (error) {

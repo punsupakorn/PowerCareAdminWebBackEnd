@@ -12,4 +12,8 @@ router.get("/", async (req, res) => {
 
 router.delete("/",deleteOfficer);
 
+router.get("/test", (req,res) => {
+  res.json("ok")
+})
+
 module.exports = router;

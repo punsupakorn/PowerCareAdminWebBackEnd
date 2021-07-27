@@ -1,6 +1,5 @@
 const db = require("../config/firebase_config");
 
-
 /////========== Create ==========/////
 const addTimeTable = async (doctor, date, time) => {
   const timetable = await db.collection("TimeTable").doc();
@@ -11,7 +10,6 @@ const addTimeTable = async (doctor, date, time) => {
     Time: time,
   });
 };
-
 
 /////========== Read ==========/////
 const getAllTimeTable = async () => {
@@ -24,5 +22,21 @@ const getAllTimeTable = async () => {
   return arr;
 };
 
+/////========== Update ==========/////
+const updateAppointment = async (TimeTableID) => {
+  db.collection("TimeTable").doc(TimeTableID).update({
 
-module.exports = { getAllTimeTable,addTimeTable};
+  });
+};
+
+/////========== Delete ==========/////
+const deleteAppointment = async (DocumentID) => {
+  db.collection("TimeTable").doc(DocumentID).delete();
+};
+
+module.exports = {
+  getAllTimeTable,
+  addTimeTable,
+  deleteAppointment,
+  updateAppointment,
+};

@@ -1,4 +1,4 @@
-const {addTimeTable} = require("../models/AppointmentModels");
+const {addTimeTable,updateAppointment} = require("../models/AppointmentModels");
 
 const addDoctorAppointment = async(req,res)=>{
     try {
@@ -11,5 +11,14 @@ const addDoctorAppointment = async(req,res)=>{
         res.status(500).json(error)
     }
 }
+
+// const editAppointment = async(req,res)=>{
+//     try {
+//         const document = req.body.document
+//         const 
+//     } catch (error) {
+        
+//     }
+// }
 
 module.exports={addDoctorAppointment};
