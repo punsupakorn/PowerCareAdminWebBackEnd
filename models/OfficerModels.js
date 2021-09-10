@@ -1,4 +1,4 @@
-const db = require("../config/firebase_config");
+const { db, auth } = require("../config/firebase_config");
 
 /////========== Create ==========/////
 const addAdmin = async (
@@ -9,7 +9,13 @@ const addAdmin = async (
   Email,
   Password
 ) => {
-  const docAdminRef = await db.collection("Admin").doc();
+  const docAdminRef = db.collection("Admin").doc();
+  await auth.createUser({
+    email: Email,
+    password: Password,
+    displayName: FirstName,
+    uid: docAdminRef.id,
+  });
 
   await db.collection("Admin").doc(docAdminRef.id).set({
     DocumentID: docAdminRef.id,
@@ -31,6 +37,12 @@ const addDoctor = async (
   Password
 ) => {
   const docDoctorRef = await db.collection("Admin").doc();
+  await auth.createUser({
+    email: Email,
+    password: Password,
+    displayName: FirstName,
+    uid: docDoctorRef.id,
+  });
 
   await db.collection("Doctor").doc(docDoctorRef.id).set({
     DocumentID: docDoctorRef.id,
@@ -72,14 +84,65 @@ const getDoctor = async () => {
 };
 
 /////========== Update ==========/////
+const updateDoctor = async (
+  DocumentID,
+  FirstName,
+  LastName,
+  Phone,
+  Position,
+  Email,
+  Password
+) => {
+  const doctorRef = db.collection("Doctor").doc(DocumentID);
+  await doctorRef.update({
+    FirstName: FirstName,
+    LastName: LastName,
+    Phone: Phone,
+    Position: Position,
+    Email: Email,
+    Password: Password,
+  });
+  auth.updateUser(DocumentID, {
+    email: Email,
+    password: Password,
+    displayName: FirstName,
+  });
+};
+
+const updateAdmin = async (
+  DocumentID,
+  FirstName,
+  LastName,
+  Phone,
+  Position,
+  Email,
+  Password
+) => {
+  const doctorRef = db.collection("Admin").doc(DocumentID);
+  await doctorRef.update({
+    FirstName: FirstName,
+    LastName: LastName,
+    Phone: Phone,
+    Position: Position,
+    Email: Email,
+    Password: Password,
+  });
+  auth.updateUser(DocumentID, {
+    email: Email,
+    password: Password,
+    displayName: FirstName,
+  });
+};
 
 /////========== Delete ==========/////
 const deleteDoctor = async (DocumentID) => {
   db.collection("Doctor").doc(DocumentID).delete();
+  auth.deleteUser(DocumentID);
 };
 
 const deleteAdmin = async (DocumentID) => {
   db.collection("Admin").doc(DocumentID).delete();
+  auth.deleteUser(DocumentID);
 };
 
 module.exports = {
@@ -87,6 +150,8 @@ module.exports = {
   addDoctor,
   getAllOfficer,
   getDoctor,
+  updateDoctor,
+  updateAdmin,
   deleteDoctor,
-  deleteAdmin
+  deleteAdmin,
 };
