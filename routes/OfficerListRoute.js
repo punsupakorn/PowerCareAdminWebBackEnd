@@ -3,7 +3,7 @@ const router = express.Router();
 const {
   getAllOfficer,
   deleteOfficer
-} = require("../controller/OfficerListController");
+} = require("../controller/OfficerlistController");
 
 router.get("/", async (req, res) => {
   let result = await getAllOfficer();
