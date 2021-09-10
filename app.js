@@ -6,7 +6,7 @@ var logger = require("morgan");
 
 var addOfficerRouter = require("./routes/AddOfficerRoute");
 var AppointmentRouter = require("./routes/AppointmentRoute");
-var officerListRouter = require("./routes/OfficerlistRoute");
+var officerListRouter = require("./routes/OfficerListRoute");
 var scheduleRouter = require("./routes/ScheduleRoute");
 
 var app = express();
