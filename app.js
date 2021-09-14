@@ -8,6 +8,7 @@ var addOfficerRouter = require("./routes/AddOfficerRoute");
 var AppointmentRouter = require("./routes/AppointmentRoute");
 var officerListRouter = require("./routes/OfficerListRoute");
 var scheduleRouter = require("./routes/ScheduleRoute");
+var workingRouter = require("./routes/WorkingRoute");
 
 var app = express();
 
@@ -22,5 +23,6 @@ app.use("/AddOfficer", addOfficerRouter);
 app.use("/Appointment", AppointmentRouter);
 app.use("/OfficerList", officerListRouter);
 app.use("/Schedule", scheduleRouter);
+app.use("/Working", workingRouter);
 
 module.exports = app;

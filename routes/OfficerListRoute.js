@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const {
   getAllOfficer,
-  deleteOfficer
+  deleteOfficer,
 } = require("../controller/OfficerListController");
 
 router.get("/", async (req, res) => {
@@ -10,10 +10,10 @@ router.get("/", async (req, res) => {
   res.json(result);
 });
 
-router.delete("/",deleteOfficer);
+router.delete("/", deleteOfficer);
 
-router.get("/test", (req,res) => {
-  res.json("ok")
-})
+// router.get("/test", (req,res) => {
+//   res.json("ok")
+// })
 
 module.exports = router;
