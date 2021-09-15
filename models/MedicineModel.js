@@ -19,9 +19,22 @@ const addMedicine = async (Name, Description, Price, Type, Stock) => {
 };
 
 ///// read /////
-
+const getMedicine = async() => {
+  try {
+    const medicine = await db.collection("Medicine");
+    const snapshot = await medicine.get();
+    const arr = [];
+    snapshot.forEach((doc)=>{
+      arr.push(doc.data());
+    });
+    return arr;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+}
 ///// update /////
 
 ///// delete /////
 
-module.exports = { addMedicine };
+module.exports = { addMedicine,getMedicine };

@@ -1,4 +1,4 @@
-const { addMedicine } = require("../models/MedicineModel");
+const { addMedicine,getMedicine } = require("../models/MedicineModel");
 
 const createMedicine = async (req, res) => {
   try {
@@ -14,4 +14,6 @@ const createMedicine = async (req, res) => {
   }
 };
 
-module.exports = { createMedicine };
+
+
+module.exports = { createMedicine,getMedicine };
