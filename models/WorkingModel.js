@@ -1,5 +1,6 @@
 const { db } = require("../config/firebase_config");
 
+///// get appointment /////
 const getAppointment = async () => {
   try {
     const appointment = await db.collection("Appointment");
@@ -14,4 +15,14 @@ const getAppointment = async () => {
   }
 };
 
-module.exports = { getAppointment };
+///// delete appointment /////
+const deleteAppointment = async (DocumentID) => {
+  try {
+    db.collection("Appointment").doc(DocumentID).delete();
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
+module.exports = { getAppointment,deleteAppointment };
