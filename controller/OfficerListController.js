@@ -2,6 +2,8 @@ const {
   getAllOfficer,
   deleteDoctor,
   deleteAdmin,
+  getAdminProfile,
+  getDoctorProfile,
 } = require("../models/OfficerModels");
 
 const deleteOfficer = async (req, res) => {
@@ -24,4 +26,17 @@ const deleteOfficer = async (req, res) => {
   }
 };
 
-module.exports = { getAllOfficer, deleteOfficer };
+const getOfficerProfile = async (DocumentID, Position) => {
+  try {
+    if (Position == "Admin") {
+      await getAdminProfile(DocumentID);
+    } else if (Position == "Doctor") {
+      await getDoctorProfile(DocumentID);
+    }
+  } catch (error) {
+    return error;
+  }
+};
+
+
+module.exports = { getAllOfficer, deleteOfficer,getOfficerProfile };

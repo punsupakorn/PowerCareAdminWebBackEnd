@@ -1,3 +1,5 @@
+// const express = require("express");
+const { json } = require("express");
 const { db, auth } = require("../config/firebase_config");
 
 /////========== Create ==========/////
@@ -11,14 +13,14 @@ const addAdmin = async (
 ) => {
   const docAdminRef = db.collection("Admin").doc();
   try {
-    let result1 = await auth.createUser({
+    await auth.createUser({
       email: Email,
       password: Password,
       displayName: FirstName,
       uid: docAdminRef.id,
     });
 
-    let result2 = await db.collection("Admin").doc(docAdminRef.id).set({
+    await db.collection("Admin").doc(docAdminRef.id).set({
       DocumentID: docAdminRef.id,
       FirstName: FirstName,
       LastName: LastName,
@@ -27,10 +29,8 @@ const addAdmin = async (
       Email: Email,
       Password: Password,
     });
-    console.log("result1 : "+result1)
-    console.log("result2 : "+result2)
   } catch (error) {
-   // console.log(error);
+    // console.log(error);
     return error;
   }
 };
@@ -67,6 +67,28 @@ const addDoctor = async (
 };
 
 /////========== Read ==========/////
+const getAdminProfile = async (DocumentID) => {
+  try {
+    let data = await db.collection("Admin").doc(DocumentID).get();
+    // console.log(data.data());
+    const result = data.data();
+    return result;
+  } catch (error) {
+    return error;
+  }
+};
+
+const getDoctorProfile = async (DocumentID) => {
+  try {
+    let data = await db.collection("Doctor").doc(DocumentID).get();
+    // console.log(data.data());
+    const result = data.data();
+    return result;
+  } catch (error) {
+    return error;
+  }
+};
+
 const getAllOfficer = async () => {
   try {
     const doctor = await db.collection("Doctor");
@@ -103,61 +125,58 @@ const getDoctor = async () => {
 };
 
 /////========== Update ==========/////
-const updateDoctor = async (
-  DocumentID,
-  FirstName,
-  LastName,
-  Phone,
-  Position,
-  Email,
-  Password
-) => {
-  try {
-    const doctorRef = db.collection("Doctor").doc(DocumentID);
-    await doctorRef.update({
-      FirstName: FirstName,
-      LastName: LastName,
-      Phone: Phone,
-      Position: Position,
-      Email: Email,
-      Password: Password,
-    });
-    auth.updateUser(DocumentID, {
-      email: Email,
-      password: Password,
-      displayName: FirstName,
-    });
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 const updateAdmin = async (
   DocumentID,
   FirstName,
   LastName,
   Phone,
-  Position,
   Email,
   Password
 ) => {
   try {
-    const doctorRef = db.collection("Admin").doc(DocumentID);
-    await doctorRef.update({
+    await db.collection("Admin").doc(DocumentID).update({
       FirstName: FirstName,
       LastName: LastName,
       Phone: Phone,
-      Position: Position,
       Email: Email,
       Password: Password,
     });
-    auth.updateUser(DocumentID, {
+
+    await auth.updateUser(DocumentID, {
       email: Email,
       password: Password,
       displayName: FirstName,
     });
   } catch (error) {
     console.log(error);
+    return error;
+  }
+};
+
+const updateDoctor = async (
+  DocumentID,
+  FirstName,
+  LastName,
+  Phone,
+  Email,
+  Password
+) => {
+  try {
+    await db.collection("Doctor").doc(DocumentID).update({
+      FirstName: FirstName,
+      LastName: LastName,
+      Phone: Phone,
+      Email: Email,
+      Password: Password,
+    });
+    await auth.updateUser(DocumentID, {
+      email: Email,
+      password: Password,
+      displayName: FirstName,
+    });
+  } catch (error) {
+    console.log(error);
+    return error;
   }
 };
 
@@ -184,6 +203,8 @@ module.exports = {
   addAdmin,
   addDoctor,
   getAllOfficer,
+  getAdminProfile,
+  getDoctorProfile,
   getDoctor,
   updateDoctor,
   updateAdmin,

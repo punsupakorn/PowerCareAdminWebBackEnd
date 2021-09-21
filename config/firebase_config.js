@@ -15,5 +15,6 @@ admin.initializeApp({
 });
 
 const db = admin.firestore();
+db.settings({ ignoreUndefinedProperties: true });
 const auth = admin.auth();
 module.exports = { db, auth };

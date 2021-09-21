@@ -4,12 +4,14 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
+// var testRouter = require("./routes/testRoute");
 var addOfficerRouter = require("./routes/AddOfficerRoute");
 var AppointmentRouter = require("./routes/AppointmentRoute");
 var officerListRouter = require("./routes/OfficerListRoute");
 var scheduleRouter = require("./routes/ScheduleRoute");
 var workingRouter = require("./routes/WorkingRoute");
 var medicineRouter = require("./routes/MedicineRoute");
+var editOfficerRouter = require("./routes/EditOfficerRoute");
 
 var app = express();
 
@@ -20,11 +22,13 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 // app.use('/', indexRouter);
+// app.use("/test", testRouter);
 app.use("/AddOfficer", addOfficerRouter);
 app.use("/Appointment", AppointmentRouter);
 app.use("/OfficerList", officerListRouter);
 app.use("/Schedule", scheduleRouter);
 app.use("/Working", workingRouter);
 app.use("/Medicine", medicineRouter);
+app.use("/EditOfficer", editOfficerRouter);
 
 module.exports = app;
