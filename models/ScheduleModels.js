@@ -1,4 +1,4 @@
-const { db } = require("../config/firebase_config");
+const { db, FieldValue } = require("../config/firebase_config");
 
 /////========== Create ==========/////
 const addTimeTable = async (doctor, date, time) => {
@@ -23,18 +23,33 @@ const getAllTimeTable = async () => {
 };
 
 /////========== Update ==========/////
-const updateAppointment = async (TimeTableID) => {
-  db.collection("TimeTable").doc(TimeTableID).update({});
-};
+// const updateAppointment = async (TimeTableID) => {
+//   db.collection("TimeTable").doc(TimeTableID).update({});
+// };
 
 /////========== Delete ==========/////
-const deleteAppointment = async (DocumentID) => {
-  db.collection("TimeTable").doc(DocumentID).delete();
+const deleteTimeTable = async (TimeTableID) => {
+  try {
+    await db.collection("TimeTable").doc(TimeTableID).delete();
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+const deleteTimeSlot = (TimeTableID, Time) => {
+  try {
+    const timeTableRef = db.collection("TimeTable").doc(TimeTableID);
+    timeTableRef.update({
+      Time: FieldValue.arrayRemove(Time),
+    });
+  } catch (error) {
+    return error;
+  }
 };
 
 module.exports = {
   getAllTimeTable,
   addTimeTable,
-  deleteAppointment,
-  updateAppointment,
+  deleteTimeTable,
+  deleteTimeSlot,
 };

@@ -13,10 +13,6 @@ router.get("/", async (req, res) => {
 
 router.delete("/", deleteOfficer);
 
-router.get("/:position/:documentid", (req, res) => {
-  const { documentid, position } = req.params;
-  let result = getOfficerProfile(documentid, position);
-  res.json(result);
-});
+
 
 module.exports = router;

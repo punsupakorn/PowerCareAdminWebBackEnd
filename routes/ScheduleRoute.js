@@ -1,12 +1,15 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const {getAllTimeTable,removeAppointment} = require("../controller/ScheduleController");
+const {
+  getAllTimeTable,
+  deleteDoctorSlot,
+} = require("../controller/ScheduleController");
 
-router.get('/',async(req,res)=>{
-    let result = await getAllTimeTable()
-    res.json(result)
+router.get("/", async (req, res) => {
+  let result = await getAllTimeTable();
+  res.json(result);
 });
 
-router.delete('/',removeAppointment);
+router.delete("/", deleteDoctorSlot);
 
-module.exports = router ;
+module.exports = router;

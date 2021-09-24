@@ -2,21 +2,21 @@ const { json } = require("express");
 const {
   updateAdmin,
   updateDoctor,
-  // getAdminProfile,
-  // getDoctorProfile,
+  getAdminProfile,
+  getDoctorProfile,
 } = require("../models/OfficerModels");
 
-// const getOfficerProfile = async (DocumentID, Position) => {
-//   try {
-//     if (Position == "Admin") {
-//       await getAdminProfile(DocumentID);
-//     } else if (Position == "Doctor") {
-//       await getDoctorProfile(DocumentID);
-//     }
-//   } catch (error) {
-//     return error;
-//   }
-// };
+const getOfficerProfile = async (DocumentID, Position) => {
+  try {
+    if (Position == "Admin") {
+      await getAdminProfile(DocumentID);
+    } else if (Position == "Doctor") {
+      await getDoctorProfile(DocumentID);
+    }
+  } catch (error) {
+    return error;
+  }
+};
 
 const editOfficer = async (req, res) => {
   const DocumentID = req.body.DocumentID;
@@ -48,4 +48,4 @@ const editOfficer = async (req, res) => {
   }
 };
 
-module.exports = { editOfficer };
+module.exports = { editOfficer,getOfficerProfile};
