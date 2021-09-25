@@ -1,12 +1,13 @@
 const { db, FieldValue } = require("../config/firebase_config");
 
 /////========== Create ==========/////
-const addTimeTable = async (doctor, date, time) => {
+const addTimeTable = async (doctor, element, time) => {
+  const resultDate = new Date(element).toLocaleDateString();
   const timetable = await db.collection("TimeTable").doc();
   await db.collection("TimeTable").doc(timetable.id).set({
     TimeTableID: timetable.id,
     DoctorName: doctor,
-    Date: date,
+    Date: resultDate,
     Time: time,
   });
 };
