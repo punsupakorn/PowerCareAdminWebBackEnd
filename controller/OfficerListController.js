@@ -38,5 +38,4 @@ const getOfficerProfile = async (DocumentID, Position) => {
   }
 };
 
-
-module.exports = { getAllOfficer, deleteOfficer,getOfficerProfile };
+module.exports = { getAllOfficer, deleteOfficer, getOfficerProfile };

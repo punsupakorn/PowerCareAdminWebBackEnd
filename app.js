@@ -3,6 +3,7 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+var cors = require("cors");
 
 // var testRouter = require("./routes/testRoute");
 var addOfficerRouter = require("./routes/AddOfficerRoute");
@@ -12,9 +13,11 @@ var scheduleRouter = require("./routes/ScheduleRoute");
 var workingRouter = require("./routes/WorkingRoute");
 var medicineRouter = require("./routes/MedicineRoute");
 var editOfficerRouter = require("./routes/EditOfficerRoute");
+var userRouter = require("./routes/UserRoute");
 
 var app = express();
 
+app.use(cors());
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -30,5 +33,6 @@ app.use("/Schedule", scheduleRouter);
 app.use("/Working", workingRouter);
 app.use("/Medicine", medicineRouter);
 app.use("/EditOfficer", editOfficerRouter);
+app.use("/User", userRouter);
 
 module.exports = app;

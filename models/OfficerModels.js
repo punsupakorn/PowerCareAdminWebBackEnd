@@ -91,8 +91,8 @@ const getDoctorProfile = async (DocumentID) => {
 
 const getAllOfficer = async () => {
   try {
-    const doctor = await db.collection("Doctor");
-    const admin = await db.collection("Admin");
+    const doctor = db.collection("Doctor");
+    const admin = db.collection("Admin");
     const snapshotdoctor = await doctor.get();
     const snapshotadmin = await admin.get();
     const arr = [];
