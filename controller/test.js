@@ -1,5 +1,5 @@
 const { db } = require("../config/firebase_config");
-const { getAdminProfile } = require("../models/OfficerModels");
+const { getStaffProfile } = require("../models/OfficerModels");
 
 // const update = () => {
 //   const DocumentID = req.body.DocumentID;

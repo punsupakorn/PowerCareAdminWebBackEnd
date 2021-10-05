@@ -1,8 +1,8 @@
 const {
   getAllOfficer,
   deleteDoctor,
-  deleteAdmin,
-  getAdminProfile,
+  deleteStaff,
+  getStaffProfile,
   getDoctorProfile,
 } = require("../models/OfficerModels");
 

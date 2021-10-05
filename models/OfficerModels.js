@@ -44,7 +44,7 @@ const addDoctor = async (
   Password
 ) => {
   try {
-    const docDoctorRef = await db.collection("Admin").doc();
+    const docDoctorRef = await db.collection("Doctor").doc();
     await auth.createUser({
       email: Email,
       password: Password,
@@ -98,9 +98,9 @@ const addStaff = async (
 };
 
 /////========== Read ==========/////
-const getAdminProfile = async (DocumentID) => {
+const getStaffProfile = async (DocumentID) => {
   try {
-    let data = await db.collection("Admin").doc(DocumentID).get();
+    let data = await db.collection("Staff").doc(DocumentID).get();
     // console.log(data.data());
     const result = data.data();
     return result;
@@ -123,14 +123,14 @@ const getDoctorProfile = async (DocumentID) => {
 const getAllOfficer = async () => {
   try {
     const doctor = db.collection("Doctor");
-    const admin = db.collection("Admin");
+    const staff = db.collection("Staff");
     const snapshotdoctor = await doctor.get();
-    const snapshotadmin = await admin.get();
+    const snapshotstaff = await staff.get();
     const arr = [];
     snapshotdoctor.forEach((doc) => {
       arr.push(doc.data());
     });
-    snapshotadmin.forEach((doc) => {
+    snapshotstaff.forEach((doc) => {
       arr.push(doc.data());
     });
     return arr;
@@ -156,7 +156,7 @@ const getDoctor = async () => {
 };
 
 /////========== Update ==========/////
-const updateAdmin = async (
+const updateStaff = async (
   DocumentID,
   FirstName,
   LastName,
@@ -165,7 +165,7 @@ const updateAdmin = async (
   Password
 ) => {
   try {
-    await db.collection("Admin").doc(DocumentID).update({
+    await db.collection("Staff").doc(DocumentID).update({
       FirstName: FirstName,
       LastName: LastName,
       Phone: Phone,
@@ -221,9 +221,9 @@ const deleteDoctor = async (DocumentID) => {
   }
 };
 
-const deleteAdmin = async (DocumentID) => {
+const deleteStaff = async (DocumentID) => {
   try {
-    db.collection("Admin").doc(DocumentID).delete();
+    db.collection("Staff").doc(DocumentID).delete();
     auth.deleteUser(DocumentID);
   } catch (error) {
     console.log(error);
@@ -235,11 +235,11 @@ module.exports = {
   addDoctor,
   addStaff,
   getAllOfficer,
-  getAdminProfile,
+  getStaffProfile,
   getDoctorProfile,
   getDoctor,
   updateDoctor,
-  updateAdmin,
+  updateStaff,
   deleteDoctor,
-  deleteAdmin,
+  deleteStaff,
 };

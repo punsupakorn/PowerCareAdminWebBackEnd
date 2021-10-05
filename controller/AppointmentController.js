@@ -1,4 +1,4 @@
-const { addTimeTable, updateAppointment } = require("../models/ScheduleModels");
+const { addTimeTable } = require("../models/ScheduleModels");
 
 const addDoctorAppointment = async (req, res) => {
   try {

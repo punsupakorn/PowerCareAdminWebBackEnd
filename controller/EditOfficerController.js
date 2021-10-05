@@ -1,14 +1,14 @@
 const {
-  updateAdmin,
+  updateStaff,
   updateDoctor,
-  getAdminProfile,
+  getStaffProfile,
   getDoctorProfile,
 } = require("../models/OfficerModels");
 
 const getOfficerProfile = async (DocumentID, Position) => {
   try {
-    if (Position == "Admin") {
-      await getAdminProfile(DocumentID);
+    if (Position == "Staff") {
+      await getStaffProfile(DocumentID);
     } else if (Position == "Doctor") {
       await getDoctorProfile(DocumentID);
     }
@@ -27,9 +27,9 @@ const editOfficer = async (req, res) => {
   const Password = req.body.Password;
 
   try {
-    if (Position == "Admin") {
-      updateAdmin(DocumentID, FirstName, LastName, Phone, Email, Password).then(
-        res.status(200).send("Edit Admin Scuccess !")
+    if (Position == "Staff") {
+      updateStaff(DocumentID, FirstName, LastName, Phone, Email, Password).then(
+        res.status(200).send("Edit Staff Scuccess !")
       );
     } else if (Position == "Doctor") {
       updateDoctor(
