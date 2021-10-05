@@ -1,5 +1,5 @@
 // const express = require("express");
-const { json } = require("express");
+// const { json } = require("express");
 const { db, auth } = require("../config/firebase_config");
 
 /////========== Create ==========/////
@@ -63,6 +63,37 @@ const addDoctor = async (
     });
   } catch (error) {
     console.log(error);
+  }
+};
+
+const addStaff = async (
+  FirstName,
+  LastName,
+  Phone,
+  Position,
+  Email,
+  Password
+) => {
+  const docStaffRef = db.collection("Staff").doc();
+  try {
+    await auth.createUser({
+      email: Email,
+      password: Password,
+      displayName: FirstName,
+      uid: docStaffRef.id,
+    });
+
+    await db.collection("Staff").doc(docStaffRef.id).set({
+      DocumentID: docStaffRef.id,
+      FirstName: FirstName,
+      LastName: LastName,
+      Phone: Phone,
+      Position: Position,
+      Email: Email,
+      Password: Password,
+    });
+  } catch (error) {
+    return error;
   }
 };
 
@@ -202,6 +233,7 @@ const deleteAdmin = async (DocumentID) => {
 module.exports = {
   addAdmin,
   addDoctor,
+  addStaff,
   getAllOfficer,
   getAdminProfile,
   getDoctorProfile,
