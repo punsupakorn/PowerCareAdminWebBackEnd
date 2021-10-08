@@ -5,7 +5,7 @@ const {
   getDoctorProfile,
 } = require("../models/OfficerModels");
 
-const getOfficerProfile = async (DocumentID, Position) => {
+const getOfficerProfile = async (Position,DocumentID) => {
   try {
     if (Position == "Staff") {
       await getStaffProfile(DocumentID);

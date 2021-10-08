@@ -3,37 +3,37 @@
 const { db, auth } = require("../config/firebase_config");
 
 /////========== Create ==========/////
-const addAdmin = async (
-  FirstName,
-  LastName,
-  Phone,
-  Position,
-  Email,
-  Password
-) => {
-  const docAdminRef = db.collection("Admin").doc();
-  try {
-    await auth.createUser({
-      email: Email,
-      password: Password,
-      displayName: FirstName,
-      uid: docAdminRef.id,
-    });
+// const addAdmin = async (
+//   FirstName,
+//   LastName,
+//   Phone,
+//   Position,
+//   Email,
+//   Password
+// ) => {
+//   const docAdminRef = db.collection("Admin").doc();
+//   try {
+//     await auth.createUser({
+//       email: Email,
+//       password: Password,
+//       displayName: FirstName,
+//       uid: docAdminRef.id,
+//     });
 
-    await db.collection("Admin").doc(docAdminRef.id).set({
-      DocumentID: docAdminRef.id,
-      FirstName: FirstName,
-      LastName: LastName,
-      Phone: Phone,
-      Position: Position,
-      Email: Email,
-      Password: Password,
-    });
-  } catch (error) {
-    // console.log(error);
-    return error;
-  }
-};
+//     await db.collection("Admin").doc(docAdminRef.id).set({
+//       DocumentID: docAdminRef.id,
+//       FirstName: FirstName,
+//       LastName: LastName,
+//       Phone: Phone,
+//       Position: Position,
+//       Email: Email,
+//       Password: Password,
+//     });
+//   } catch (error) {
+//     // console.log(error);
+//     return error;
+//   }
+// };
 
 const addDoctor = async (
   FirstName,
@@ -100,24 +100,28 @@ const addStaff = async (
 /////========== Read ==========/////
 const getStaffProfile = async (DocumentID) => {
   try {
-    let data = await db.collection("Staff").doc(DocumentID).get();
-    // console.log(data.data());
-    const result = data.data();
-    return result;
-  } catch (error) {
-    return error;
-  }
+    const staffRef = db.collection("Staff").doc(DocumentID);
+    const doc = await staffRef.get();
+    if (!doc.exists) {
+      console.log("No such document!");
+    } else {
+      console.log("Document data:", doc.data());
+      return doc.data();
+    }
+  } catch (error) {}
 };
 
 const getDoctorProfile = async (DocumentID) => {
   try {
-    let data = await db.collection("Doctor").doc(DocumentID).get();
-    // console.log(data.data());
-    const result = data.data();
-    return result;
-  } catch (error) {
-    return error;
-  }
+    const doctorRef = db.collection("Doctor").doc(DocumentID);
+    const doc = await doctorRef.get();
+    if (!doc.exists) {
+      console.log("No such document!");
+    } else {
+      console.log("Document data:", doc.data());
+      return doc.data();
+    }
+  } catch (error) {}
 };
 
 const getAllOfficer = async () => {
@@ -231,7 +235,7 @@ const deleteStaff = async (DocumentID) => {
 };
 
 module.exports = {
-  addAdmin,
+  // addAdmin,
   addDoctor,
   addStaff,
   getAllOfficer,

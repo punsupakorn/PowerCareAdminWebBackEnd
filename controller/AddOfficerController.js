@@ -26,13 +26,13 @@ const addOfficer = async (req, res) => {
       //res.status(500).json(result);
       res.status(500).send("already");
     }
-  } else if (Position == "Doctor") {
+  } else if (Position == "แพทย์") {
     await addDoctor(FirstName, LastName, Phone, Position, Email, Password).then(
-      res.status(200).send("add doctor success!")
+      res.status(200).send("เพิ่มแพทย์", FirstName, " ", LastName, "สำเร็จ")
     );
   } else if (Position == "Staff") {
     await addStaff(FirstName, LastName, Phone, Position, Email, Password).then(
-      res.status(200).send("add staff success!")
+      res.status(200).send("เพิ่มเจ้าหน้าที่", FirstName, " ", LastName, "สำเร็จ")
     );
   }
   // } catch (error) {

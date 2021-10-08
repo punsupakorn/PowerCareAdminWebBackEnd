@@ -12,6 +12,7 @@ var officerListRouter = require("./routes/OfficerListRoute");
 var scheduleRouter = require("./routes/ScheduleRoute");
 var workingRouter = require("./routes/WorkingRoute");
 var medicineRouter = require("./routes/MedicineRoute");
+var manageMedicineRouter = require("./routes/ManageMedicineRoute");
 var editOfficerRouter = require("./routes/EditOfficerRoute");
 var userRouter = require("./routes/UserRoute");
 
@@ -34,5 +35,6 @@ app.use("/Working", workingRouter);
 app.use("/Medicine", medicineRouter);
 app.use("/EditOfficer", editOfficerRouter);
 app.use("/User", userRouter);
+app.use("/ManageMedicine", manageMedicineRouter);
 
 module.exports = app;

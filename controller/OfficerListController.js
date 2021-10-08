@@ -15,11 +15,11 @@ const deleteOfficer = async (req, res) => {
       res.status(200);
       //res.json({result:"delete doctor success!"})
       console.log("delete doctor success!");
-    } else if (Position == "Admin") {
-      deleteAdmin(DocumentID);
+    } else if (Position == "Staff") {
+      deleteStaff(DocumentID);
       res.status(200);
       //res.json({result:"delete admin success!"})
-      console.log("delete admin success!");
+      console.log("delete staff success!");
     }
   } catch (error) {
     res.status(500).json(error);
@@ -28,8 +28,8 @@ const deleteOfficer = async (req, res) => {
 
 const getOfficerProfile = async (DocumentID, Position) => {
   try {
-    if (Position == "Admin") {
-      await getAdminProfile(DocumentID);
+    if (Position == "Staff") {
+      await getStaffProfile(DocumentID);
     } else if (Position == "Doctor") {
       await getDoctorProfile(DocumentID);
     }
