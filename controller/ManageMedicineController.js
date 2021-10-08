@@ -1,4 +1,8 @@
-const { addMedicine, getMedicine } = require("../models/MedicineModel");
+const {
+  addMedicine,
+  getMedicine,
+  deleteMedicine,
+} = require("../models/MedicineModel");
 
 const createMedicine = async (req, res) => {
   try {
@@ -14,4 +18,12 @@ const createMedicine = async (req, res) => {
   }
 };
 
-module.exports = { getMedicine, createMedicine };
+const removeMedicine = async (req, res) => {
+  try {
+    const MedicineID = req.body.MedicineID;
+    await deleteMedicine(MedicineID);
+    res.status(200).send("Deleted Medicine !");
+  } catch (error) {}
+};
+
+module.exports = { getMedicine, createMedicine, removeMedicine };

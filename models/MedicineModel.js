@@ -50,5 +50,10 @@ const getMedicine = async (MedicineID) => {
 ///// update /////
 
 ///// delete /////
+const deleteMedicine = (MedicineID) => {
+  try {
+    db.collection("Medicine").doc(MedicineID).delete();
+  } catch (error) {}
+};
 
-module.exports = { addMedicine, getAllMedicine, getMedicine };
+module.exports = { addMedicine, getAllMedicine, getMedicine, deleteMedicine };

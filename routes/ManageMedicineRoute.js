@@ -3,6 +3,7 @@ const router = express.Router();
 const {
   getMedicine,
   createMedicine,
+  removeMedicine
 } = require("../controller/ManageMedicineController");
 
 router.post("/", createMedicine);
@@ -12,5 +13,7 @@ router.get("/:medicineid", (req, res) => {
   let result = getMedicine(medicineid);
   res.json(result);
 });
+
+router.delete("/", removeMedicine);
 
 module.exports = router;
