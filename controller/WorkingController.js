@@ -1,3 +1,3 @@
-const { getAppointment, deleteAppointment } = require("../models/WorkingModel");
+const { getAllAppointment, deleteAppointment } = require("../models/AppointmentModel");
 
-module.exports = { getAppointment, deleteAppointment };
+module.exports = { getAllAppointment, deleteAppointment };

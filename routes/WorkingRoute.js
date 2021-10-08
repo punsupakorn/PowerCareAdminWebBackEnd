@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const {
-  getAppointment,
+  getAllAppointment,
   deleteAppointment,
 } = require("../controller/WorkingController");
 
 router.get("/", async (req, res) => {
-  let result = await getAppointment();
+  let result = await getAllAppointment();
   res.json(result);
 });
 

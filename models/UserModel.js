@@ -16,6 +16,19 @@ const getAllUser = async () => {
     return error;
   }
 };
+
+const getUser = async (UserID) => {
+  try {
+    const userRef = db.collection("User").doc(UserID);
+    const doc = await userRef.get();
+    if (!doc.exists) {
+      console.log("No such document!");
+    } else {
+      console.log("Document data:", doc.data());
+      return doc.data();
+    }
+  } catch (error) {}
+};
 //// update ////
 
 //// delete ////
@@ -28,4 +41,4 @@ const deleteUser = (UserID) => {
   }
 };
 
-module.exports = { getAllUser, deleteUser };
+module.exports = { getAllUser, getUser, deleteUser };
