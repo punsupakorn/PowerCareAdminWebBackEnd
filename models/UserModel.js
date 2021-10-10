@@ -24,7 +24,7 @@ const getUser = async (UserID) => {
     if (!doc.exists) {
       console.log("No such document!");
     } else {
-      console.log("Document data:", doc.data());
+      // console.log("Document data:", doc.data());
       return doc.data();
     }
   } catch (error) {}

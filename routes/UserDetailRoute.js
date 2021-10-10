@@ -9,7 +9,8 @@ router.get("/:userid", (req, res) => {
   const { userid } = req.params;
   let UserResult = getUserProfile(userid);
   let AppointmentResult = getUserAppointment(userid);
-  res.json(UserResult, AppointmentResult);
+  // const result = { UserResult, AppointmentResult };
+  res.json({UserResult, AppointmentResult});
 });
 
 module.exports = router;

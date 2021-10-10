@@ -9,9 +9,11 @@ const getUserProfile = async (UserID) => {
   }
 };
 
-const getUserAppointment = (UserID) => {
+const getUserAppointment = async (UserID) => {
   try {
-    getAppointment(UserID);
-  } catch (error) {}
+    await getAppointment(UserID);
+  } catch (error) {
+    return error;
+  }
 };
 module.exports = { getUserProfile, getUserAppointment };

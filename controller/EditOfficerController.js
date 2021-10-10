@@ -7,9 +7,9 @@ const {
 
 const getOfficerProfile = async (Position,DocumentID) => {
   try {
-    if (Position == "Staff") {
+    if (Position == "เจ้าหน้าที่") {
       await getStaffProfile(DocumentID);
-    } else if (Position == "Doctor") {
+    } else if (Position == "แพทย์") {
       await getDoctorProfile(DocumentID);
     }
   } catch (error) {
@@ -27,11 +27,11 @@ const editOfficer = async (req, res) => {
   const Password = req.body.Password;
 
   try {
-    if (Position == "Staff") {
+    if (Position == "เจ้าหน้าที่") {
       updateStaff(DocumentID, FirstName, LastName, Phone, Email, Password).then(
         res.status(200).send("Edit Staff Scuccess !")
       );
-    } else if (Position == "Doctor") {
+    } else if (Position == "แพทย์") {
       updateDoctor(
         DocumentID,
         FirstName,
