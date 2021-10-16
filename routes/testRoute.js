@@ -1,17 +1,12 @@
 const express = require("express");
 const router = express.Router();
+const { getDoctorProfile } = require("../controller/test");
 
-// const { update } = require("../controller/test");
-const { getAdminProfile } = require("../controller/test");
-
-// router.get("/", async (req, res) => {
-//   let result = await update();
-//   res.json(result);
-// });
-
-// router.get("/", async (req, res) => {
-//   let result = await getAdminProfile();
-//   res.json(result);
-// });
+router.get("/", (req, res) => {
+  const { documentid } = req.params;
+  let result = getDoctorProfile(documentid);
+  res.json(result);
+  // return result;
+});
 
 module.exports = router;

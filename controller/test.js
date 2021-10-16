@@ -1,20 +1,16 @@
 const { db } = require("../config/firebase_config");
-const { getStaffProfile } = require("../models/OfficerModels");
 
-// const update = () => {
-//   const DocumentID = req.body.DocumentID;
-//   const Position = req.body.Position;
+const getDoctorProfile = async (DocumentID) => {
+  try {
+    const doctorRef = db.collection("Doctor").doc(DocumentID);
+    const doc = await doctorRef.get();
+    if (!doc.exists) {
+      console.log("No such document!");
+    } else {
+      console.log("Document data:", doc.data());
+      return doc.data();
+    }
+  } catch (error) {}
+};
 
-//   try {
-//     if (Position == "Admin") {
-//       db.collection("Admin").doc(DocumentID).get();
-//       //   console.log(result);
-//       //   return result;
-//     } else {
-//     }
-//   } catch (error) {
-//     return error;
-//   }
-// };
-
-module.exports = {  };
+module.exports = { getDoctorProfile };

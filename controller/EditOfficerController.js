@@ -5,12 +5,12 @@ const {
   getDoctorProfile,
 } = require("../models/OfficerModels");
 
-const getOfficerProfile = async (Position,DocumentID) => {
+const getOfficerProfile = async (position, documentid) => {
   try {
-    if (Position == "เจ้าหน้าที่") {
-      await getStaffProfile(DocumentID);
-    } else if (Position == "แพทย์") {
-      await getDoctorProfile(DocumentID);
+    if (position == "เจ้าหน้าที่") {
+      await getStaffProfile(documentid);
+    } else if (position == "แพทย์") {
+      await getDoctorProfile(documentid);
     }
   } catch (error) {
     return error;
@@ -47,4 +47,7 @@ const editOfficer = async (req, res) => {
   }
 };
 
-module.exports = { editOfficer,getOfficerProfile};
+module.exports = {
+  editOfficer,
+   getOfficerProfile
+};

@@ -108,7 +108,9 @@ const getStaffProfile = async (DocumentID) => {
       console.log("Document data:", doc.data());
       return doc.data();
     }
-  } catch (error) {}
+  } catch (error) {
+    return error;
+  }
 };
 
 const getDoctorProfile = async (DocumentID) => {
@@ -121,7 +123,9 @@ const getDoctorProfile = async (DocumentID) => {
       console.log("Document data:", doc.data());
       return doc.data();
     }
-  } catch (error) {}
+  } catch (error) {
+    return error;
+  }
 };
 
 const getAllOfficer = async () => {

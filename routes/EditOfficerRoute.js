@@ -7,11 +7,10 @@ const {
 
 router.put("/", editOfficer);
 
-router.get("/:position/:documentid", (req, res) => {
-  const { position, documentid } = req.params;
-  let result = getOfficerProfile(position, documentid);
+router.get("/:Position/:DocumentID", (req, res) => {
+  const { Position, DocumentID } = req.params;
+  let result = getOfficerProfile(Position, DocumentID);
   res.json(result);
-  // return result;
 });
 
 module.exports = router;

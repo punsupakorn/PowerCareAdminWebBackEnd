@@ -16,6 +16,7 @@ var manageMedicineRouter = require("./routes/ManageMedicineRoute");
 var editOfficerRouter = require("./routes/EditOfficerRoute");
 var userRouter = require("./routes/UserRoute");
 var userDetailRouter = require("./routes/UserDetailRoute");
+var confirmAddOfficerRouter = require("./routes/ConfirmAddOfficerRoute");
 
 var app = express();
 
@@ -26,7 +27,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-// app.use('/', indexRouter);
 // app.use("/test", testRouter);
 app.use("/AddOfficer", addOfficerRouter);
 app.use("/Appointment", AppointmentRouter);
@@ -38,5 +38,6 @@ app.use("/EditOfficer", editOfficerRouter);
 app.use("/User", userRouter);
 app.use("/ManageMedicine", manageMedicineRouter);
 app.use("/UserDetail", userDetailRouter);
+app.use("/ConfirmAddOfficer", confirmAddOfficerRouter);
 
 module.exports = app;
