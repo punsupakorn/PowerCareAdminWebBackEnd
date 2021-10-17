@@ -105,12 +105,10 @@ const getStaffProfile = async (DocumentID) => {
     if (!doc.exists) {
       console.log("No such document!");
     } else {
-      console.log("Document data:", doc.data());
+      // console.log("Document data:", doc.data());
       return doc.data();
     }
-  } catch (error) {
-    return error;
-  }
+  } catch (error) {}
 };
 
 const getDoctorProfile = async (DocumentID) => {
@@ -120,12 +118,10 @@ const getDoctorProfile = async (DocumentID) => {
     if (!doc.exists) {
       console.log("No such document!");
     } else {
-      console.log("Document data:", doc.data());
+      // console.log("Document data:", doc.data());
       return doc.data();
     }
-  } catch (error) {
-    return error;
-  }
+  } catch (error) {}
 };
 
 const getAllOfficer = async () => {

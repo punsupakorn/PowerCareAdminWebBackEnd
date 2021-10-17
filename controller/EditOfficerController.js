@@ -8,9 +8,31 @@ const {
 const getOfficerProfile = async (position, documentid) => {
   try {
     if (position == "เจ้าหน้าที่") {
-      await getStaffProfile(documentid);
+      const data = await getStaffProfile(documentid);
+      const profile = {
+        DocumentID: data.DocumentID,
+        FirstName: data.FirstName,
+        LastName: data.LastName,
+        Position: data.Position,
+        Phone: data.Phone,
+        Password: data.Password,
+        Email: data.Email,
+      };
+      // console.log(profile);
+      return profile;
     } else if (position == "แพทย์") {
-      await getDoctorProfile(documentid);
+      const data = await getDoctorProfile(documentid);
+      const profile = {
+        DocumentID: data.DocumentID,
+        FirstName: data.FirstName,
+        LastName: data.LastName,
+        Position: data.Position,
+        Phone: data.Phone,
+        Password: data.Password,
+        Email: data.Email,
+      };
+      // console.log(profile);
+      return profile;
     }
   } catch (error) {
     return error;
@@ -49,5 +71,5 @@ const editOfficer = async (req, res) => {
 
 module.exports = {
   editOfficer,
-   getOfficerProfile
+  getOfficerProfile,
 };
