@@ -1,13 +1,20 @@
 const { addAdmin, addDoctor, addStaff } = require("../models/OfficerModels");
 
-const addOfficer = async (req, res) => {
+const addOfficer = async (
+  FirstName,
+  LastName,
+  Phone,
+  Position,
+  Email,
+  Password
+) => {
   try {
-    const FirstName = req.body.FirstName;
-    const LastName = req.body.LastName;
-    const Phone = req.body.Phone;
-    const Position = req.body.Position;
-    const Email = req.body.Email;
-    const Password = req.body.Password;
+    // const FirstName = req.body.FirstName;
+    // const LastName = req.body.LastName;
+    // const Phone = req.body.Phone;
+    // const Position = req.body.Position;
+    // const Email = req.body.Email;
+    // const Password = req.body.Password;
 
     // if (Position == "Admin") {
     //   let result = await addAdmin(
@@ -28,26 +35,33 @@ const addOfficer = async (req, res) => {
     //   }
     // } else
     if (Position == "แพทย์") {
-      await addDoctor(
-        FirstName,
-        LastName,
-        Phone,
-        Position,
-        Email,
-        Password
-      ).then(res.status(200).send("add doctor success!"));
+      await addDoctor(FirstName, LastName, Phone, Position, Email, Password);
+      // .then(res.status(200).send("add doctor success!"));
+
+      let data = {
+        FirstName: FirstName,
+        LastName: LastName,
+        Phone: Phone,
+        Position: Position,
+        Email: Email,
+        Password: Password,
+      };
+      return data;
     } else if (Position == "เจ้าหน้าที่") {
-      await addStaff(
-        FirstName,
-        LastName,
-        Phone,
-        Position,
-        Email,
-        Password
-      ).then(res.status(200).send("add staff success!"));
+      await addStaff(FirstName, LastName, Phone, Position, Email, Password);
+      // .then(res.status(200).send("add staff success!"));
+      let data = {
+        FirstName: FirstName,
+        LastName: LastName,
+        Phone: Phone,
+        Position: Position,
+        Email: Email,
+        Password: Password,
+      };
+      return data;
     }
   } catch (error) {
-    res.status(500).json(error);
+    // res.status(500).json(error);
     console.log(error);
   }
 };
