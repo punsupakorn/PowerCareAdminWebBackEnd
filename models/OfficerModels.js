@@ -159,6 +159,51 @@ const getDoctor = async () => {
   }
 };
 
+const isStaff = async (Email) => {
+  const staffRef = db.collection("Staff");
+  const snapshot = await staffRef.where("Email", "==", Email).get();
+  if (!snapshot.empty) {
+    // snapshot.forEach((doc) => {
+    //   console.log(doc.data());
+    //   return doc.data();
+    // });
+    return true;
+  } else {
+    return false;
+  }
+};
+
+const isDoctor = async (Email) => {
+  const doctorRef = db.collection("Doctor");
+  const snapshot = await doctorRef.where("Email", "==", Email).get();
+  if (!snapshot.empty) {
+    // snapshot.forEach((doc) => {
+    //   console.log(doc.data());
+    //   return doc.data();
+    // });
+    return true;
+  } else {
+    return false;
+  }
+};
+
+const isAdmin = async (Email) => {
+  const adminRef = db.collection("Admin");
+  const snapshot = await adminRef.where("Email", "==", Email).get();
+  if (!snapshot.empty) {
+    // snapshot.forEach((doc) => {
+    //   console.log(doc.data());
+    //   return doc.data();
+    // });
+    return true;
+  } else {
+    return false;
+  }
+};
+
+
+
+
 /////========== Update ==========/////
 const updateStaff = async (
   DocumentID,
@@ -246,4 +291,7 @@ module.exports = {
   updateStaff,
   deleteDoctor,
   deleteStaff,
+  isStaff,
+  isAdmin,
+  isDoctor,
 };

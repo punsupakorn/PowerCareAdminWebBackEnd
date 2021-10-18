@@ -9,12 +9,6 @@ const addOfficer = async (
   Password
 ) => {
   try {
-    // const FirstName = req.body.FirstName;
-    // const LastName = req.body.LastName;
-    // const Phone = req.body.Phone;
-    // const Position = req.body.Position;
-    // const Email = req.body.Email;
-    // const Password = req.body.Password;
 
     // if (Position == "Admin") {
     //   let result = await addAdmin(

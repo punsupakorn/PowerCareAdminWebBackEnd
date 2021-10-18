@@ -3,7 +3,8 @@ const { getAppointment } = require("../models/AppointmentModel");
 
 const getUserProfile = async (UserID) => {
   try {
-    await getUser(UserID);
+    const data = await getUser(UserID);
+    return data;
   } catch (error) {
     return error;
   }

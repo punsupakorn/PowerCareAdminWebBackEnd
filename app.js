@@ -6,6 +6,7 @@ var logger = require("morgan");
 var cors = require("cors");
 
 // var testRouter = require("./routes/testRoute");
+var loginRouter = require("./routes/LoginRoute");
 var addOfficerRouter = require("./routes/AddOfficerRoute");
 var AppointmentRouter = require("./routes/AppointmentRoute");
 var officerListRouter = require("./routes/OfficerListRoute");
@@ -28,6 +29,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 // app.use("/test", testRouter);
+app.use("/Login", loginRouter);
 app.use("/AddOfficer", addOfficerRouter);
 app.use("/Appointment", AppointmentRouter);
 app.use("/OfficerList", officerListRouter);

@@ -5,12 +5,10 @@ const {
   getUserAppointment,
 } = require("../controller/UserDetailController");
 
-router.get("/:userid", (req, res) => {
+router.get("/:userid", async (req, res) => {
   const { userid } = req.params;
-  let UserResult = getUserProfile(userid);
-  let AppointmentResult = getUserAppointment(userid);
-  // const result = { UserResult, AppointmentResult };
-  res.json({UserResult, AppointmentResult});
+  let UserResult = await getUserProfile(userid);
+  res.send(UserResult);
 });
 
 module.exports = router;
