@@ -128,13 +128,18 @@ const getAllOfficer = async () => {
   try {
     const doctor = db.collection("Doctor");
     const staff = db.collection("Staff");
+    const admin = db.collection("Admin")
     const snapshotdoctor = await doctor.get();
     const snapshotstaff = await staff.get();
+    const snapshotadmin = await admin.get();
     const arr = [];
     snapshotdoctor.forEach((doc) => {
       arr.push(doc.data());
     });
     snapshotstaff.forEach((doc) => {
+      arr.push(doc.data());
+    });
+    snapshotadmin.forEach((doc) => {
       arr.push(doc.data());
     });
     return arr;
