@@ -159,55 +159,59 @@ const getDoctor = async () => {
   }
 };
 
-const isStaff = async (Email, Password) => {
+const isStaff = async (Email) => {
   const staffRef = db.collection("Staff");
   const snapshot = await staffRef.where("Email", "==", Email).get();
-  var returnArr = [];
-  snapshot.forEach((doc) => {
-    returnArr.push(doc.data());
-  });
+  // var returnArr = [];
+  // snapshot.forEach((doc) => {
+  //   returnArr.push(doc.data());
+  // });
   if (snapshot.empty) {
     return false;
-  } else if (returnArr[0].Password == Password) {
-    console.log(true);
-    return true;
   } else {
-    return false;
+    return true;
   }
+  // if (returnArr[0].Password == Password) {
+  //   console.log(true);
+  //   return true;
+  // } else
 };
 
-const isDoctor = async (Email, Password) => {
+const isDoctor = async (Email) => {
   const docotrRef = db.collection("Doctor");
   const snapshot = await docotrRef.where("Email", "==", Email).get();
-  var returnArr = [];
-  snapshot.forEach((doc) => {
-    returnArr.push(doc.data());
-  });
   if (snapshot.empty) {
     return false;
-  } else if (returnArr[0].Password == Password) {
-    console.log(true);
-    return true;
   } else {
-    return false;
+    return true;
   }
+  // var returnArr = [];
+  // snapshot.forEach((doc) => {
+  //   returnArr.push(doc.data());
+  // });
+
+  // if (returnArr[0].Password == Password) {
+  //   console.log(true);
+  //   return true;
+  // } else
 };
 
-const isAdmin = async (Email, Password) => {
+const isAdmin = async (Email) => {
   const adminRef = db.collection("Admin");
   const snapshot = await adminRef.where("Email", "==", Email).get();
-  var returnArr = [];
-  snapshot.forEach((doc) => {
-    returnArr.push(doc.data());
-  });
+  // var returnArr = [];
+  // snapshot.forEach((doc) => {
+  //   returnArr.push(doc.data());
+  // });
   if (snapshot.empty) {
     return false;
-  } else if (returnArr[0].Password == Password) {
-    console.log(true);
-    return true;
   } else {
-    return false;
+    return true;
   }
+  // if (returnArr[0].Password == Password) {
+  //   console.log(true);
+  //   return true;
+  // } else {
 };
 
 /////========== Update ==========/////

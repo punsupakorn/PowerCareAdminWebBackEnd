@@ -1,10 +1,10 @@
 const { isStaff, isAdmin, isDoctor } = require("../models/OfficerModels");
 
-const checkRole = async (Email, Password) => {
-  const checkStaff = await isStaff(Email, Password);
-  const checkAdmin = await isAdmin(Email, Password);
-  const checkDoctor = await isDoctor(Email, Password);
-  console.log(checkStaff);
+const checkRole = async (Email) => {
+  const checkStaff = await isStaff(Email);
+  const checkAdmin = await isAdmin(Email);
+  const checkDoctor = await isDoctor(Email);
+  // console.log(checkStaff);
   if (checkStaff == true) {
     return "เจ้าหน้าที่";
   } else if (checkAdmin == true){
