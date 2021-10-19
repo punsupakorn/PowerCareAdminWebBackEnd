@@ -159,50 +159,56 @@ const getDoctor = async () => {
   }
 };
 
-const isStaff = async (Email) => {
+const isStaff = async (Email, Password) => {
   const staffRef = db.collection("Staff");
   const snapshot = await staffRef.where("Email", "==", Email).get();
-  if (!snapshot.empty) {
-    // snapshot.forEach((doc) => {
-    //   console.log(doc.data());
-    //   return doc.data();
-    // });
+  var returnArr = [];
+  snapshot.forEach((doc) => {
+    returnArr.push(doc.data());
+  });
+  if (snapshot.empty) {
+    return false;
+  } else if (returnArr[0].Password == Password) {
+    console.log(true);
     return true;
   } else {
     return false;
   }
 };
 
-const isDoctor = async (Email) => {
-  const doctorRef = db.collection("Doctor");
-  const snapshot = await doctorRef.where("Email", "==", Email).get();
-  if (!snapshot.empty) {
-    // snapshot.forEach((doc) => {
-    //   console.log(doc.data());
-    //   return doc.data();
-    // });
+const isDoctor = async (Email, Password) => {
+  const docotrRef = db.collection("Doctor");
+  const snapshot = await docotrRef.where("Email", "==", Email).get();
+  var returnArr = [];
+  snapshot.forEach((doc) => {
+    returnArr.push(doc.data());
+  });
+  if (snapshot.empty) {
+    return false;
+  } else if (returnArr[0].Password == Password) {
+    console.log(true);
     return true;
   } else {
     return false;
   }
 };
 
-const isAdmin = async (Email) => {
+const isAdmin = async (Email, Password) => {
   const adminRef = db.collection("Admin");
   const snapshot = await adminRef.where("Email", "==", Email).get();
-  if (!snapshot.empty) {
-    // snapshot.forEach((doc) => {
-    //   console.log(doc.data());
-    //   return doc.data();
-    // });
+  var returnArr = [];
+  snapshot.forEach((doc) => {
+    returnArr.push(doc.data());
+  });
+  if (snapshot.empty) {
+    return false;
+  } else if (returnArr[0].Password == Password) {
+    console.log(true);
     return true;
   } else {
     return false;
   }
 };
-
-
-
 
 /////========== Update ==========/////
 const updateStaff = async (
