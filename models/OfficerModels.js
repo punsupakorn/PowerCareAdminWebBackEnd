@@ -3,37 +3,37 @@
 const { db, auth } = require("../config/firebase_config");
 
 /////========== Create ==========/////
-// const addAdmin = async (
-//   FirstName,
-//   LastName,
-//   Phone,
-//   Position,
-//   Email,
-//   Password
-// ) => {
-//   const docAdminRef = db.collection("Admin").doc();
-//   try {
-//     await auth.createUser({
-//       email: Email,
-//       password: Password,
-//       displayName: FirstName,
-//       uid: docAdminRef.id,
-//     });
+const addAdmin = async (
+  FirstName,
+  LastName,
+  Phone,
+  Position,
+  Email,
+  Password
+) => {
+  const docAdminRef = db.collection("Admin").doc();
+  try {
+    await auth.createUser({
+      email: Email,
+      password: Password,
+      displayName: FirstName,
+      uid: docAdminRef.id,
+    });
 
-//     await db.collection("Admin").doc(docAdminRef.id).set({
-//       DocumentID: docAdminRef.id,
-//       FirstName: FirstName,
-//       LastName: LastName,
-//       Phone: Phone,
-//       Position: Position,
-//       Email: Email,
-//       Password: Password,
-//     });
-//   } catch (error) {
-//     // console.log(error);
-//     return error;
-//   }
-// };
+    await db.collection("Admin").doc(docAdminRef.id).set({
+      DocumentID: docAdminRef.id,
+      FirstName: FirstName,
+      LastName: LastName,
+      Phone: Phone,
+      Position: Position,
+      Email: Email,
+      Password: Password,
+    });
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
 
 const addDoctor = async (
   FirstName,
@@ -290,7 +290,7 @@ const deleteStaff = async (DocumentID) => {
 };
 
 module.exports = {
-  // addAdmin,
+  addAdmin,
   addDoctor,
   addStaff,
   getAllOfficer,
