@@ -2,9 +2,7 @@ const {
   addAdmin,
   addDoctor,
   addStaff,
-  emailAdminExist,
-  emailDocotrExist,
-  emailStaffExist,
+  checkEmailExist,
 } = require("../models/OfficerModels");
 
 const addOfficer = async (
@@ -66,19 +64,22 @@ const addOfficer = async (
   }
 };
 
-const checkEmailExist = async (Email) => {
-  const staffExist = await emailStaffExist(Email);
-  const doctorExist = await emailDocotrExist(Email);
-  const adminExist = await emailAdminExist(Email);
-  if (staffExist == false) {
-    return false;
-  } else if (adminExist == false) {
-    return false;
-  } else if (doctorExist == false) {
-    return false;
-  } else {
-    return true;
-  }
-};
+// const checkEmailExist = async (Email) => {
+//   const staffExist = await emailStaffExist(Email);
+//   const doctorExist = await emailDocotrExist(Email);
+//   const adminExist = await emailAdminExist(Email);
+//   if (staffExist == false) {
+//     return false;
+//   } else if (adminExist == false) {
+//     return false;
+//   } else if (doctorExist == false) {
+//     return false;
+//   } else {
+//     return true;
+//   }
+// };
 
-module.exports = { addOfficer, checkEmailExist };
+module.exports = {
+  addOfficer,
+  checkEmailExist,
+};

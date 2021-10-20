@@ -4,7 +4,6 @@ const {
   addOfficer,
   checkEmailExist,
 } = require("../controller/AddOfficerController.js");
-// const {emailDocotrExist} = require("../models/OfficerModels");
 
 router.get("/:Email", async (req, res) => {
   const { Email } = req.params;

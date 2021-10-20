@@ -219,47 +219,69 @@ const isAdmin = async (Email) => {
   // } else {
 };
 
-const emailStaffExist = async (Email) => {
+const checkEmailExist = async (Email) => {
   try {
     const staffRef = db.collection("Staff");
-    const snapshot = await staffRef.where("Email", "==", Email).get();
-    if (!snapshot.empty) {
-      return false;
-    } else {
-      return true;
-    }
-  } catch (error) {
-    return error;
-  }
-};
-
-const emailAdminExist = async (Email) => {
-  try {
-    const adminRef = db.collection("Admin");
-    const snapshot = await adminRef.where("Email", "==", Email).get();
-    if (!snapshot.empty) {
-      return false;
-    } else {
-      return true;
-    }
-  } catch (error) {
-    return error;
-  }
-};
-
-const emailDocotrExist = async (Email) => {
-  try {
     const doctorRef = db.collection("Doctor");
-    const snapshot = await doctorRef.where("Email", "==", Email).get();
-    if (!snapshot.empty) {
+    const adminRef = db.collection("Admin");
+    const snapshotstaff = await staffRef.where("Email", "==", Email).get();
+    const snapshotAdmin = await adminRef.where("Email", "==", Email).get();
+    const snapshotDoctor = await doctorRef.where("Email", "==", Email).get();
+    if (!snapshotstaff.empty) {
       return false;
-    } else {
-      return true;
+    } else if (!snapshotAdmin.empty) {
+      return false;
+    } else if (!snapshotDoctor.empty) {
+      return false;
     }
+    return true;
   } catch (error) {
     return error;
   }
 };
+
+// const emailStaffExist = async (Email) => {
+//   try {
+//     const staffRef = db.collection("Staff");
+//     const snapshot = await staffRef.where("Email", "==", Email).get();
+//     if (!snapshot.empty) {
+//       return false;
+//     } else {
+//       return true;
+//     }
+//   } catch (error) {
+//     return error;
+//   }
+// };
+
+// const emailAdminExist = async (Email) => {
+//   try {
+//     const adminRef = db.collection("Admin");
+//     const snapshot = await adminRef.where("Email", "==", Email).get();
+//     if (!snapshot.empty) {
+//       return false;
+//     } else {
+//       return true;
+//     }
+//   } catch (error) {
+//     return error;
+//   }
+// };
+
+// const emailDocotrExist = async (Email) => {
+//   try {
+//     const doctorRef = db.collection("Doctor");
+//     const snapshot = await doctorRef.where("Email", "==", Email).get();
+//     if (!snapshot.empty) {
+//       return false;
+//     } else {
+//       return true;
+//     }
+//   } catch (error) {
+//     return error;
+//   }
+// };
+
 /////========== Update ==========/////
 const updateStaff = async (
   DocumentID,
@@ -350,7 +372,8 @@ module.exports = {
   isStaff,
   isAdmin,
   isDoctor,
-  emailAdminExist,
-  emailDocotrExist,
-  emailStaffExist,
+  checkEmailExist,
+  // emailAdminExist,
+  // emailDocotrExist,
+  // emailStaffExist,
 };
