@@ -1,6 +1,17 @@
 const express = require("express");
 const router = express.Router();
-const { addOfficer } = require("../controller/AddOfficerController.js");
+const {
+  addOfficer,
+  checkEmailExist,
+} = require("../controller/AddOfficerController.js");
+// const {emailDocotrExist} = require("../models/OfficerModels");
+
+router.get("/:Email", async (req, res) => {
+  const { Email } = req.params;
+  let result = await checkEmailExist(Email);
+  console.log("result :", result);
+  res.send(result);
+});
 
 router.post("/", async (req, res) => {
   const FirstName = req.body.FirstName;
