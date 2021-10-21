@@ -15,27 +15,16 @@ const addOfficer = async (
 ) => {
   try {
     if (Position == "ผู้ดูแลระบบ") {
-      let result = await addAdmin(
-        FirstName,
-        LastName,
-        Phone,
-        Position,
-        Email,
-        Password
-      );
-      if (result == false) {
-        return "Exist";
-      } else {
-        let data = {
-          FirstName: FirstName,
-          LastName: LastName,
-          Phone: Phone,
-          Position: Position,
-          Email: Email,
-          Password: Password,
-        };
-        return data;
-      }
+      addAdmin(FirstName, LastName, Phone, Position, Email, Password);
+      let data = {
+        FirstName: FirstName,
+        LastName: LastName,
+        Phone: Phone,
+        Position: Position,
+        Email: Email,
+        Password: Password,
+      };
+      return data;
     } else if (Position == "แพทย์") {
       await addDoctor(FirstName, LastName, Phone, Position, Email, Password);
       let data = {
@@ -61,6 +50,7 @@ const addOfficer = async (
     }
   } catch (error) {
     console.log(error);
+    return error;
   }
 };
 

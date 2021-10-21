@@ -341,6 +341,7 @@ const deleteDoctor = async (DocumentID) => {
     auth.deleteUser(DocumentID);
   } catch (error) {
     console.log(error);
+    return error;
   }
 };
 
@@ -350,6 +351,17 @@ const deleteStaff = async (DocumentID) => {
     auth.deleteUser(DocumentID);
   } catch (error) {
     console.log(error);
+    return error;
+  }
+};
+
+const deleteAdmin = async (DocumentID) => {
+  try {
+    db.collection("Admin").doc(DocumentID).delete();
+    auth.deleteUser(DocumentID);
+  } catch (error) {
+    console.log(error);
+    return error;
   }
 };
 
@@ -367,6 +379,7 @@ module.exports = {
   updateStaff,
   deleteDoctor,
   deleteStaff,
+  deleteAdmin,
   isStaff,
   isAdmin,
   isDoctor,

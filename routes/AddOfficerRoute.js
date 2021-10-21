@@ -28,7 +28,6 @@ router.post("/", async (req, res) => {
     Email,
     Password
   );
-  //   console.log(result);
   res.send(result);
 });
 

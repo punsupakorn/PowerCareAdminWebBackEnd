@@ -2,27 +2,27 @@ const {
   getAllOfficer,
   deleteDoctor,
   deleteStaff,
+  deleteAdmin,
   getStaffProfile,
   getDoctorProfile,
 } = require("../models/OfficerModels");
 
-const deleteOfficer = async (req, res) => {
-  const DocumentID = req.body.DocumentID;
-  const Position = req.body.Position;
+const deleteOfficer = async (Position, DocumentID) => {
   try {
     if (Position == "แพทย์") {
       deleteDoctor(DocumentID);
-      res.status(200);
-      //res.json({result:"delete doctor success!"})
-      console.log("delete doctor success!");
+      return true;
     } else if (Position == "เจ้าหน้าที่") {
       deleteStaff(DocumentID);
-      res.status(200);
-      //res.json({result:"delete admin success!"})
-      console.log("delete staff success!");
+      return true;
+    } else if (Position == "ผู้ดูแลระบบ") {
+      deleteAdmin(DocumentID);
+      return true;
+    } else {
+      return false;
     }
   } catch (error) {
-    res.status(500).json(error);
+    return error;
   }
 };
 

@@ -3,7 +3,7 @@ const router = express.Router();
 const {
   getAllOfficer,
   deleteOfficer,
-  getOfficerProfile
+  getOfficerProfile,
 } = require("../controller/OfficerListController");
 
 router.get("/", async (req, res) => {
@@ -11,8 +11,11 @@ router.get("/", async (req, res) => {
   res.json(result);
 });
 
-router.delete("/", deleteOfficer);
-
-
+router.delete("/", async (req, res) => {
+  const DocumentID = req.body.DocumentID;
+  const Position = req.body.Position;
+  let result = await deleteOfficer(Position, DocumentID);
+  res.send(result);
+});
 
 module.exports = router;
