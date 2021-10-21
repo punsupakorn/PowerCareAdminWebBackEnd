@@ -18,6 +18,7 @@ var editOfficerRouter = require("./routes/EditOfficerRoute");
 var userRouter = require("./routes/UserRoute");
 var userDetailRouter = require("./routes/UserDetailRoute");
 var confirmAddOfficerRouter = require("./routes/ConfirmAddOfficerRoute");
+var profileRouter = require("./routes/ProfileRoute");
 
 var app = express();
 
@@ -41,5 +42,6 @@ app.use("/User", userRouter);
 app.use("/ManageMedicine", manageMedicineRouter);
 app.use("/UserDetail", userDetailRouter);
 app.use("/ConfirmAddOfficer", confirmAddOfficerRouter);
+app.use("/Profile", profileRouter);
 
 module.exports = app;

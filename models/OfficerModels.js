@@ -98,31 +98,68 @@ const addStaff = async (
 };
 
 /////========== Read ==========/////
-const getStaffProfile = async (DocumentID) => {
+const getProfile = async (DocumentID) => {
   try {
     const staffRef = db.collection("Staff").doc(DocumentID);
-    const doc = await staffRef.get();
-    if (!doc.exists) {
-      console.log("No such document!");
-    } else {
-      // console.log("Document data:", doc.data());
-      return doc.data();
-    }
-  } catch (error) {}
-};
-
-const getDoctorProfile = async (DocumentID) => {
-  try {
+    const adminRef = db.collection("Admin").doc(DocumentID);
     const doctorRef = db.collection("Doctor").doc(DocumentID);
-    const doc = await doctorRef.get();
-    if (!doc.exists) {
-      console.log("No such document!");
+    const docStaff = await staffRef.get();
+    const docDoctor = await doctorRef.get();
+    const docAdmin = await adminRef.get();
+
+    if (docStaff.exists) {
+      return docStaff.data();
+    } else if (docAdmin.exists) {
+      return docAdmin.data();
+    } else if (docDoctor.exists) {
+      return docDoctor.data();
     } else {
-      // console.log("Document data:", doc.data());
-      return doc.data();
+      return false;
+      F;
     }
   } catch (error) {}
 };
+// const getStaffProfile = async (DocumentID) => {
+//   try {
+//     const staffRef = db.collection("Staff").doc(DocumentID);
+//     const docStaff = await staffRef.get();
+//     // if (!doc.exists) {
+//     //   // console.log("No such document!");
+//     //   return false;
+//     // } else {
+//     //   // console.log("Document data:", doc.data());
+//     //   return doc.data();
+//     // }
+//   } catch (error) {}
+// };
+
+// const getDoctorProfile = async (DocumentID) => {
+//   try {
+//     const doctorRef = db.collection("Doctor").doc(DocumentID);
+//     const doc = await doctorRef.get();
+//     // if (!doc.exists) {
+//     //   // console.log("No such document!");
+//     //   return false;
+//     // } else {
+//     //   // console.log("Document data:", doc.data());
+//     //   return doc.data();
+//     // }
+//   } catch (error) {}
+// };
+
+// const getAdminProfile = async (DocumentID) => {
+//   try {
+//     const adminRef = db.collection("Admin").doc(DocumentID);
+//     const doc = await adminRef.get();
+//     // if (!doc.exists) {
+//     //   // console.log("No such document!");
+//     //   return false;
+//     // } else {
+//     //   // console.log("Document data:", doc.data());
+//     //   return doc.data();
+//     // }
+//   } catch (error) {}
+// };
 
 const getAllOfficer = async () => {
   try {
@@ -240,48 +277,6 @@ const checkEmailExist = async (Email) => {
   }
 };
 
-// const emailStaffExist = async (Email) => {
-//   try {
-//     const staffRef = db.collection("Staff");
-//     const snapshot = await staffRef.where("Email", "==", Email).get();
-//     if (!snapshot.empty) {
-//       return false;
-//     } else {
-//       return true;
-//     }
-//   } catch (error) {
-//     return error;
-//   }
-// };
-
-// const emailAdminExist = async (Email) => {
-//   try {
-//     const adminRef = db.collection("Admin");
-//     const snapshot = await adminRef.where("Email", "==", Email).get();
-//     if (!snapshot.empty) {
-//       return false;
-//     } else {
-//       return true;
-//     }
-//   } catch (error) {
-//     return error;
-//   }
-// };
-
-// const emailDocotrExist = async (Email) => {
-//   try {
-//     const doctorRef = db.collection("Doctor");
-//     const snapshot = await doctorRef.where("Email", "==", Email).get();
-//     if (!snapshot.empty) {
-//       return false;
-//     } else {
-//       return true;
-//     }
-//   } catch (error) {
-//     return error;
-//   }
-// };
-
 /////========== Update ==========/////
 const updateStaff = async (
   DocumentID,
@@ -362,8 +357,10 @@ module.exports = {
   addDoctor,
   addStaff,
   getAllOfficer,
-  getStaffProfile,
-  getDoctorProfile,
+  // getStaffProfile,
+  // getDoctorProfile,
+  // getAdminProfile,
+  getProfile,
   getDoctor,
   updateDoctor,
   updateStaff,
