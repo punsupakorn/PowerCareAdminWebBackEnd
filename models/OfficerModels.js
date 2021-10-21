@@ -1,5 +1,6 @@
 // const express = require("express");
 // const { json } = require("express");
+const e = require("express");
 const { db, auth } = require("../config/firebase_config");
 
 /////========== Create ==========/////
@@ -278,26 +279,55 @@ const checkEmailExist = async (Email) => {
   }
 };
 
+const checkOldPassword = async (Position, DocumentID, Password) => {
+  const adminRef = db.collection("Admin").doc(DocumentID);
+  const staffRef = db.collection("Staff").doc(DocumentID);
+  const doctorRef = db.collection("Doctor").doc(DocumentID);
+  if (Position == "ผู้ดูแลระบบ") {
+    const docAdmin = await adminRef.get();
+    const admin = docAdmin.data();
+    if (Password == admin.Password) {
+      return true;
+    } else {
+      return false;
+    }
+  } else if (Position == "แพทย์") {
+    const docDoctor = await doctorRef.get();
+    const doctor = docDoctor.data();
+    if (Password == doctor.Password) {
+      return true;
+    } else {
+      return false;
+    }
+  } else if (Position == "เจ้าหน้าที่") {
+    const docStaff = await staffRef.get();
+    const staff = docStaff.data();
+    if (Password == staff.Password) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+};
+
 /////========== Update ==========/////
 const updateStaff = async (
   DocumentID,
   FirstName,
   LastName,
   Phone,
-  Email,
   Password
+  // Position
 ) => {
   try {
     await db.collection("Staff").doc(DocumentID).update({
       FirstName: FirstName,
       LastName: LastName,
       Phone: Phone,
-      Email: Email,
       Password: Password,
     });
 
     await auth.updateUser(DocumentID, {
-      email: Email,
       password: Password,
       displayName: FirstName,
     });
@@ -312,19 +342,42 @@ const updateDoctor = async (
   FirstName,
   LastName,
   Phone,
-  Email,
   Password
+  // Position
 ) => {
   try {
     await db.collection("Doctor").doc(DocumentID).update({
       FirstName: FirstName,
       LastName: LastName,
       Phone: Phone,
-      Email: Email,
       Password: Password,
     });
     await auth.updateUser(DocumentID, {
-      email: Email,
+      password: Password,
+      displayName: FirstName,
+    });
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
+const updateAdmin = async (
+  DocumentID,
+  FirstName,
+  LastName,
+  Phone,
+  Password
+  // Position
+) => {
+  try {
+    await db.collection("Admin").doc(DocumentID).update({
+      FirstName: FirstName,
+      LastName: LastName,
+      Phone: Phone,
+      Password: Password,
+    });
+    await auth.updateUser(DocumentID, {
       password: Password,
       displayName: FirstName,
     });
@@ -376,6 +429,7 @@ module.exports = {
   getProfile,
   getDoctor,
   updateDoctor,
+  updateAdmin,
   updateStaff,
   deleteDoctor,
   deleteStaff,
@@ -384,6 +438,7 @@ module.exports = {
   isAdmin,
   isDoctor,
   checkEmailExist,
+  checkOldPassword,
   // emailAdminExist,
   // emailDocotrExist,
   // emailStaffExist,

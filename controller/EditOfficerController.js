@@ -1,9 +1,12 @@
+const e = require("express");
 const {
   updateStaff,
   updateDoctor,
+  updateAdmin,
   getStaffProfile,
   getDoctorProfile,
   getAdminProfile,
+  checkOldPassword,
 } = require("../models/OfficerModels");
 
 const getOfficerProfile = async (position, documentid) => {
@@ -61,23 +64,51 @@ const editOfficer = async (
   FirstName,
   LastName,
   Phone,
-  Email,
-  Password
+  Password,
+  Position
 ) => {
   try {
     if (Position == "เจ้าหน้าที่") {
-      updateStaff(DocumentID, FirstName, LastName, Phone, Email, Password).then(
-        res.status(200).send("Edit Staff Scuccess !")
-      );
-    } else if (Position == "แพทย์") {
-      updateDoctor(
+      await updateStaff(
         DocumentID,
         FirstName,
         LastName,
         Phone,
-        Email,
-        Password
-      ).then(res.status(200).send("Edit Doctor Scuccess !"));
+        Password,
+        Position
+      );
+      return true;
+      // .then(
+      //   res.status(200).send("Edit Staff Scuccess !")
+      // );
+    } else if (Position == "แพทย์") {
+      await updateDoctor(
+        DocumentID,
+        FirstName,
+        LastName,
+        Phone,
+        Password,
+        Position
+      );
+      return true;
+      // .then(
+      //   res.status(200).send("Edit Doctor Scuccess !")
+      // );
+    } else if (Position == "ผู้ดูแลระบบ") {
+      await updateAdmin(
+        DocumentID,
+        FirstName,
+        LastName,
+        Phone,
+        Password,
+        Position
+      );
+      return true;
+      // .then(
+      //   res.status(200).send("Edit Admin Success !")
+      // );
+    } else {
+      return false;
     }
   } catch (error) {
     console.log(error);
@@ -88,4 +119,5 @@ const editOfficer = async (
 module.exports = {
   editOfficer,
   getOfficerProfile,
+  checkOldPassword,
 };
