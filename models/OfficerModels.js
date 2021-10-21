@@ -119,47 +119,48 @@ const getProfile = async (DocumentID) => {
     }
   } catch (error) {}
 };
-// const getStaffProfile = async (DocumentID) => {
-//   try {
-//     const staffRef = db.collection("Staff").doc(DocumentID);
-//     const docStaff = await staffRef.get();
-//     // if (!doc.exists) {
-//     //   // console.log("No such document!");
-//     //   return false;
-//     // } else {
-//     //   // console.log("Document data:", doc.data());
-//     //   return doc.data();
-//     // }
-//   } catch (error) {}
-// };
 
-// const getDoctorProfile = async (DocumentID) => {
-//   try {
-//     const doctorRef = db.collection("Doctor").doc(DocumentID);
-//     const doc = await doctorRef.get();
-//     // if (!doc.exists) {
-//     //   // console.log("No such document!");
-//     //   return false;
-//     // } else {
-//     //   // console.log("Document data:", doc.data());
-//     //   return doc.data();
-//     // }
-//   } catch (error) {}
-// };
+const getStaffProfile = async (DocumentID) => {
+  try {
+    const staffRef = db.collection("Staff").doc(DocumentID);
+    const docStaff = await staffRef.get();
+    if (!doc.exists) {
+      // console.log("No such document!");
+      return false;
+    } else {
+      // console.log("Document data:", doc.data());
+      return doc.data();
+    }
+  } catch (error) {}
+};
 
-// const getAdminProfile = async (DocumentID) => {
-//   try {
-//     const adminRef = db.collection("Admin").doc(DocumentID);
-//     const doc = await adminRef.get();
-//     // if (!doc.exists) {
-//     //   // console.log("No such document!");
-//     //   return false;
-//     // } else {
-//     //   // console.log("Document data:", doc.data());
-//     //   return doc.data();
-//     // }
-//   } catch (error) {}
-// };
+const getDoctorProfile = async (DocumentID) => {
+  try {
+    const doctorRef = db.collection("Doctor").doc(DocumentID);
+    const doc = await doctorRef.get();
+    if (!doc.exists) {
+      // console.log("No such document!");
+      return false;
+    } else {
+      // console.log("Document data:", doc.data());
+      return doc.data();
+    }
+  } catch (error) {}
+};
+
+const getAdminProfile = async (DocumentID) => {
+  try {
+    const adminRef = db.collection("Admin").doc(DocumentID);
+    const doc = await adminRef.get();
+    if (!doc.exists) {
+      // console.log("No such document!");
+      return false;
+    } else {
+      // console.log("Document data:", doc.data());
+      return doc.data();
+    }
+  } catch (error) {}
+};
 
 const getAllOfficer = async () => {
   try {
@@ -357,9 +358,9 @@ module.exports = {
   addDoctor,
   addStaff,
   getAllOfficer,
-  // getStaffProfile,
-  // getDoctorProfile,
-  // getAdminProfile,
+  getStaffProfile,
+  getDoctorProfile,
+  getAdminProfile,
   getProfile,
   getDoctor,
   updateDoctor,

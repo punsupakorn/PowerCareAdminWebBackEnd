@@ -28,6 +28,7 @@ router.put("/", async (req, res) => {
 router.get("/:Position/:DocumentID", async (req, res) => {
   const { Position, DocumentID } = req.params;
   let result = await getOfficerProfile(Position, DocumentID);
+  // console.log("result : ", result);
   res.send(result);
 });
 
