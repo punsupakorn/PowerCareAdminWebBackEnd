@@ -39,9 +39,10 @@ const getMedicine = async (MedicineID) => {
     const medicineRef = db.collection("Medicine").doc(MedicineID);
     const doc = await medicineRef.get();
     if (!doc.exists) {
-      console.log("No such document!");
+      // console.log("No such document!");
+      return false;
     } else {
-      console.log("Document data:", doc.data());
+      // console.log("Document data:", doc.data());
       return doc.data();
     }
   } catch (error) {}
