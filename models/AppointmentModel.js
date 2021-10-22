@@ -3,24 +3,35 @@ const { db } = require("../config/firebase_config");
 ///// get appointment /////
 const getAllAppointment = async () => {
   try {
-    const appointment = await db.collection("Appointment");
+    const appointment = db.collection("Appointment");
     const snapshot = await appointment.get();
     const arr = [];
+    const User = [];
+    const Doctor = [];
     snapshot.forEach((doc) => {
       arr.push(doc.data());
     });
-    return arr;
+    for (let i = 0; i < arr.length; i++) {
+      const element = arr[i];
+      const userRef = await db.collection("User").doc(element.UserID).get();
+      User.push(userRef.data());
+      const DoctorRef = await db
+        .collection("Doctor")
+        .doc(element.DoctorID)
+        .get();
+      Doctor.push(DoctorRef.data());
+    }
+    return { arr, User, Doctor };
   } catch (error) {
     console.log(error);
+    return error;
   }
 };
 
 const getAppointment = async (UserID) => {
   try {
     const appointmentRef = db.collection("Appointment");
-    const snapshot = await appointmentRef
-      .where("UserID", "==", UserID)
-      .get();
+    const snapshot = await appointmentRef.where("UserID", "==", UserID).get();
     const arr = [];
     snapshot.forEach((doc) => {
       arr.push(doc.data());

@@ -49,6 +49,20 @@ const getMedicine = async (MedicineID) => {
 };
 
 ///// update /////
+const updatMedicine = async (MedicineID, Name, Description, Price, Type) => {
+  try {
+    await db.collection("Medicine").doc(MedicineID).update({
+      MedicineName: Name,
+      MedicineDescription: Description,
+      Price: Price,
+      Type: Type,
+    });
+    return true;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
 
 ///// delete /////
 const deleteMedicine = (MedicineID) => {
@@ -57,4 +71,10 @@ const deleteMedicine = (MedicineID) => {
   } catch (error) {}
 };
 
-module.exports = { addMedicine, getAllMedicine, getMedicine, deleteMedicine };
+module.exports = {
+  addMedicine,
+  getAllMedicine,
+  getMedicine,
+  deleteMedicine,
+  updatMedicine,
+};

@@ -7,6 +7,7 @@ const {
 
 router.get("/", async (req, res) => {
   let result = await getAllAppointment();
+  console.log("Result : ", result);
   res.json(result);
 });
 

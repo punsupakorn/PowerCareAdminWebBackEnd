@@ -1,7 +1,7 @@
 const { db, FieldValue } = require("../config/firebase_config");
 
 /////========== Create ==========/////
-const addTimeTable = async (doctor, element, time) => {
+const addTimeTable = async (doctor, element, time, id) => {
   const resultDate = new Date(element).toLocaleDateString();
   const timetable = await db.collection("TimeTable").doc();
   await db.collection("TimeTable").doc(timetable.id).set({
@@ -9,8 +9,32 @@ const addTimeTable = async (doctor, element, time) => {
     DoctorName: doctor,
     Date: resultDate,
     Time: time,
+    DoctorID: id,
   });
 };
+
+// const checkTimeTableExist = async (DoctorID, Date) => {
+//   try {
+//     const timetableRef = db.collection("TimeTable");
+//     const snapshotDoctorID = await timetableRef
+//       .where("DoctorID", "==", DoctorID)
+//       .get();
+//     const snapshotDate = await timetableRef.where("Date", "==", Date).get();
+//     snapshotDate.forEach((doc) => {
+//       console.log(doc.data());
+//     });
+//     // if (!snapshotDoctorID.empty) {
+//     //   // return false;
+//     //   snapshotDoctorID.forEach((doc)=>{
+
+//     //   })
+//     // } else {
+//     //   return true;
+//     // }
+//   } catch (error) {
+//     return error;
+//   }
+// };
 
 /////========== Read ==========/////
 const getAllTimeTable = async () => {
@@ -53,4 +77,5 @@ module.exports = {
   addTimeTable,
   deleteTimeTable,
   deleteTimeSlot,
+  // checkTimeTableExist,
 };
