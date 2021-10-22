@@ -25,12 +25,12 @@ router.put("/", async (req, res) => {
   res.send(result);
 });
 
-// router.get("/:Position/:DocumentID", async (req, res) => {
-//   const { Position, DocumentID } = req.params;
-//   let result = await getOfficerProfile(Position, DocumentID);
-//   // console.log("result : ", result);
-//   res.send(result);
-// });
+router.get("/getprofile/:Position/:DocumentID", async (req, res) => {
+  const { Position, DocumentID } = req.params;
+  let result = await getOfficerProfile(Position, DocumentID);
+  // console.log("result : ", result);
+  res.send(result);
+});
 
 router.get("/:Position/:DocumentID/:Password", async (req, res) => {
   const { Position, DocumentID, Password } = req.params;
