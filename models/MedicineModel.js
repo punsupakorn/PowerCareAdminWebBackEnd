@@ -1,7 +1,8 @@
+const { auth } = require("firebase-admin");
 const { db } = require("../config/firebase_config");
 
 ///// create /////
-const addMedicine = async (Name, Description, Price, Type, Stock) => {
+const addMedicine = async (Name, Description, Price, Type) => {
   const medicineRef = db.collection("Medicine").doc();
   try {
     await db.collection("Medicine").doc(medicineRef.id).set({
@@ -10,7 +11,6 @@ const addMedicine = async (Name, Description, Price, Type, Stock) => {
       MedicineDescription: Description,
       Price: Price,
       Type: Type,
-      Stock: Stock,
     });
   } catch (error) {
     console.log(error);
@@ -49,7 +49,8 @@ const getMedicine = async (MedicineID) => {
 };
 
 ///// update /////
-const updatMedicine = async (MedicineID, Name, Description, Price, Type) => {
+
+const updateMedicine = async (MedicineID, Name, Description, Price, Type) => {
   try {
     await db.collection("Medicine").doc(MedicineID).update({
       MedicineName: Name,
@@ -57,13 +58,11 @@ const updatMedicine = async (MedicineID, Name, Description, Price, Type) => {
       Price: Price,
       Type: Type,
     });
-    return true;
   } catch (error) {
     console.log(error);
     return error;
   }
 };
-
 ///// delete /////
 const deleteMedicine = (MedicineID) => {
   try {
@@ -76,5 +75,5 @@ module.exports = {
   getAllMedicine,
   getMedicine,
   deleteMedicine,
-  updatMedicine,
+  updateMedicine,
 };
