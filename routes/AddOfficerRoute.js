@@ -8,7 +8,7 @@ const {
 router.get("/:Email", async (req, res) => {
   const { Email } = req.params;
   let result = await checkEmailExist(Email);
-  console.log("result :", result);
+  // console.log("result :", result);
   res.send(result);
 });
 
