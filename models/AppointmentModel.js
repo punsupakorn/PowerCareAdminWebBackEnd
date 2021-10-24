@@ -6,22 +6,23 @@ const getAllAppointment = async () => {
     const appointment = db.collection("Appointment");
     const snapshot = await appointment.get();
     const arr = [];
-    const User = [];
-    const Doctor = [];
+    // const User = [];
+    // const Doctor = [];
     snapshot.forEach((doc) => {
       arr.push(doc.data());
     });
-    for (let i = 0; i < arr.length; i++) {
-      const element = arr[i];
-      const userRef = await db.collection("User").doc(element.UserID).get();
-      User.push(userRef.data());
-      const DoctorRef = await db
-        .collection("Doctor")
-        .doc(element.DoctorID)
-        .get();
-      Doctor.push(DoctorRef.data());
-    }
-    return { arr, User, Doctor };
+    // for (let i = 0; i < arr.length; i++) {
+    //   const element = arr[i];
+    //   const userRef = await db.collection("User").doc(element.UserID).get();
+    //   User.push(userRef.data());
+    //   const DoctorRef = await db
+    //     .collection("Doctor")
+    //     .doc(element.DoctorID)
+    //     .get();
+    //   Doctor.push(DoctorRef.data());
+    // }
+    // return { arr, User, Doctor };
+    return arr;
   } catch (error) {
     console.log(error);
     return error;
