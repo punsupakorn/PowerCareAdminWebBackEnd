@@ -1,4 +1,4 @@
-const { db } = require("../config/firebase_config");
+const { db, FieldValue } = require("../config/firebase_config");
 
 ///// get appointment /////
 const getAllAppointment = async () => {
@@ -65,10 +65,41 @@ const getWorkingDetail = async (AppointmentID, UserID) => {
   }
 };
 
-///// delete appointment /////
-const deleteAppointment = async (DocumentID) => {
+///// update appointment /////
+const editAppointment = async (
+  AppointmentID,
+  OldTimeTableID,
+  NewTimeTableID,
+  Date,
+  OldTime,
+  NewTime
+) => {
+  const appointmentRef = db.collection("Appointment").doc(AppointmentID);
+  const oldtimetableRef = db.collection("TimeTable").doc(OldTimeTableID);
+  const newtimetableRef = db.collection("TimeTable").doc(NewTimeTableID);
   try {
-    db.collection("Appointment").doc(DocumentID).delete();
+    await appointmentRef.update({
+      Time: NewTime,
+      Date: Date,
+      TimeTableID: NewTimeTableID,
+    });
+
+    await newtimetableRef.update({
+      Time: FieldValue.arrayRemove(NewTime),
+    });
+
+    await oldtimetableRef.update({ Time: FieldValue.arrayUnion(OldTime) });
+  } catch (error) {
+    return error;
+  }
+};
+
+///// delete appointment /////
+const deleteAppointment = async (AppointmentID, TimeTableID, Time) => {
+  try {
+    await db.collection("Appointment").doc(AppointmentID).delete();
+    const timtableRef = db.collection("TimeTable").doc(TimeTableID);
+    await timtableRef.update({ Time: FieldValue.arrayUnion(Time) });
   } catch (error) {
     console.log(error);
     return error;
@@ -80,4 +111,5 @@ module.exports = {
   getAllAppointment,
   deleteAppointment,
   getWorkingDetail,
+  editAppointment,
 };

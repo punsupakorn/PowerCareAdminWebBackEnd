@@ -22,6 +22,7 @@ var profileRouter = require("./routes/ProfileRoute");
 var workingDetailRouter = require("./routes/WorkingDetailRoute");
 var postponeRouter = require("./routes/PostponeRoute");
 var confirmCancelRouter = require("./routes/ConfirmCancelRoute");
+var summaryPostpone = require("./routes/SummaryPostponeRoute");
 
 var app = express();
 
@@ -49,5 +50,6 @@ app.use("/Profile", profileRouter);
 app.use("/WorkingDetail", workingDetailRouter);
 app.use("/Postpone", postponeRouter);
 app.use("/ConfirmCancel", confirmCancelRouter);
+app.use("/SummaryPostpone", summaryPostpone);
 
 module.exports = app;
