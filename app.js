@@ -19,6 +19,9 @@ var userRouter = require("./routes/UserRoute");
 var userDetailRouter = require("./routes/UserDetailRoute");
 var confirmAddOfficerRouter = require("./routes/ConfirmAddOfficerRoute");
 var profileRouter = require("./routes/ProfileRoute");
+var workingDetailRouter = require("./routes/WorkingDetailRoute");
+var postponeRouter = require("./routes/PostponeRoute");
+var confirmCancelRouter = require("./routes/ConfirmCancelRoute");
 
 var app = express();
 
@@ -43,5 +46,8 @@ app.use("/ManageMedicine", manageMedicineRouter);
 app.use("/UserDetail", userDetailRouter);
 app.use("/ConfirmAddOfficer", confirmAddOfficerRouter);
 app.use("/Profile", profileRouter);
+app.use("/WorkingDetail", workingDetailRouter);
+app.use("/Postpone", postponeRouter);
+app.use("/ConfirmCancel", confirmCancelRouter);
 
 module.exports = app;

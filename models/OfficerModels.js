@@ -124,7 +124,7 @@ const getProfile = async (DocumentID) => {
 const getStaffProfile = async (DocumentID) => {
   try {
     const staffRef = db.collection("Staff").doc(DocumentID);
-    const docStaff = await staffRef.get();
+    const doc = await staffRef.get();
     if (!doc.exists) {
       // console.log("No such document!");
       return false;

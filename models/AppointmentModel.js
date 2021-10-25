@@ -44,6 +44,27 @@ const getAppointment = async (UserID) => {
   }
 };
 
+const getWorkingDetail = async (AppointmentID, UserID) => {
+  try {
+    const appointmentRef = db.collection("Appointment").doc(AppointmentID);
+    const userRef = db.collection("User").doc(UserID);
+    const docAppointment = await appointmentRef.get();
+    const docUser = await userRef.get();
+    if (!docAppointment.exists) {
+      return false;
+    }
+    if (!docUser.exists) {
+      return false;
+    }
+    return JSON.stringify({
+      appointment: docAppointment.data(),
+      user: docUser.data(),
+    });
+  } catch (error) {
+    return error;
+  }
+};
+
 ///// delete appointment /////
 const deleteAppointment = async (DocumentID) => {
   try {
@@ -54,4 +75,9 @@ const deleteAppointment = async (DocumentID) => {
   }
 };
 
-module.exports = { getAppointment, getAllAppointment, deleteAppointment };
+module.exports = {
+  getAppointment,
+  getAllAppointment,
+  deleteAppointment,
+  getWorkingDetail,
+};
