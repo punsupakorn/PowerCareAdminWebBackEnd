@@ -116,7 +116,6 @@ const getProfile = async (DocumentID) => {
       return docDoctor.data();
     } else {
       return false;
-      F;
     }
   } catch (error) {}
 };
