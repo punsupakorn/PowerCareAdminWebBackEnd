@@ -65,6 +65,39 @@ const getWorkingDetail = async (AppointmentID, UserID) => {
   }
 };
 
+const getDateChange = async (DoctorID) => {
+  try {
+    const DateArr = [];
+    const timetableRef = db.collection("TimeTable");
+    const query = await timetableRef.where("DoctorID", "==", DoctorID).get();
+
+    query.forEach((doc) => {
+      const data = doc.data();
+      const date = data.Date;
+      const id = data.TimeTableID;
+      DateArr.sort().push({ Date: date, TimeTableID: id });
+    });
+
+    const filter = [...new Set(DateArr)];
+    return filter;
+  } catch (error) {
+    return error;
+  }
+};
+
+const getTime = async (TimeTableID) => {
+  try {
+    // const TimeArr = [];
+    const timetableRef = db.collection("TimeTable").doc(TimeTableID);
+    const doc = await timetableRef.get();
+    const data = doc.data();
+    const time = data.Time;
+    return time.sort();
+  } catch (error) {
+    return error;
+  }
+};
+
 ///// update appointment /////
 const editAppointment = async (
   AppointmentID,
@@ -112,4 +145,6 @@ module.exports = {
   deleteAppointment,
   getWorkingDetail,
   editAppointment,
+  getDateChange,
+  getTime,
 };
