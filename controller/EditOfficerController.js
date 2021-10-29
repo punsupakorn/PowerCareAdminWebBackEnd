@@ -13,45 +13,12 @@ const getOfficerProfile = async (position, documentid) => {
   try {
     if (position == "เจ้าหน้าที่") {
       const data = await getStaffProfile(documentid);
-      // const profile = {
-      //   DocumentID: data.DocumentID,
-      //   FirstName: data.FirstName,
-      //   LastName: data.LastName,
-      //   Position: data.Position,
-      //   Phone: data.Phone,
-      //   Password: data.Password,
-      //   Email: data.Email,
-      // };
-      // console.log(profile);
-      // return profile;
       return data;
     } else if (position == "แพทย์") {
       const data = await getDoctorProfile(documentid);
-      // const profile = {
-      //   DocumentID: data.DocumentID,
-      //   FirstName: data.FirstName,
-      //   LastName: data.LastName,
-      //   Position: data.Position,
-      //   Phone: data.Phone,
-      //   Password: data.Password,
-      //   Email: data.Email,
-      // };
-      // console.log(profile);
-      // return profile;
       return data;
     } else if (position == "ผู้ดูแลระบบ") {
-      const data = await getDoctorProfile(documentid);
-      // const profile = {
-      //   DocumentID: data.DocumentID,
-      //   FirstName: data.FirstName,
-      //   LastName: data.LastName,
-      //   Position: data.Position,
-      //   Phone: data.Phone,
-      //   Password: data.Password,
-      //   Email: data.Email,
-      // };
-      // console.log(profile);
-      // return profile;
+      const data = await getAdminProfile(documentid);
       return data;
     }
   } catch (error) {
