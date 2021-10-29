@@ -1,13 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const {
-  getUserProfile,
-  getUserAppointment,
-} = require("../controller/UserDetailController");
+const { userDetail } = require("../controller/UserDetailController");
 
 router.get("/:userid", async (req, res) => {
   const { userid } = req.params;
-  let UserResult = await getUserProfile(userid);
+  let UserResult = await userDetail(userid);
   res.send(UserResult);
 });
 

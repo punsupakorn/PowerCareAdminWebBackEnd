@@ -37,7 +37,6 @@ const getAppointment = async (UserID) => {
     snapshot.forEach((doc) => {
       arr.push(doc.data());
     });
-    // console.log("Appointment : ", arr);
     return arr;
   } catch (error) {
     console.log(error);
