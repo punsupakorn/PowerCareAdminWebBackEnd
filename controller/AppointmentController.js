@@ -1,4 +1,7 @@
-const { addTimeTable,checkTimeTableExist } = require("../models/ScheduleModels");
+const {
+  addTimeTable,
+  checkTimeTableExist,
+} = require("../models/ScheduleModels");
 
 const addDoctorAppointment = async (req, res) => {
   try {
@@ -10,11 +13,10 @@ const addDoctorAppointment = async (req, res) => {
     for (let i = 0; i < date.length; i++) {
       const element = date[i];
       await addTimeTable(doctor, element, time, id);
-      // res.status(200).send("add doctor appointment to TimeTable success!");
     }
   } catch (error) {
     return error;
   }
 };
 
-module.exports = { addDoctorAppointment,checkTimeTableExist };
+module.exports = { addDoctorAppointment, checkTimeTableExist };

@@ -13,28 +13,21 @@ const addTimeTable = async (doctor, element, time, id) => {
   });
 };
 
-// const checkTimeTableExist = async (DoctorID, Date) => {
-//   try {
-//     const timetableRef = db.collection("TimeTable");
-//     const snapshotDoctorID = await timetableRef
-//       .where("DoctorID", "==", DoctorID)
-//       .get();
-//     const snapshotDate = await timetableRef.where("Date", "==", Date).get();
-//     snapshotDate.forEach((doc) => {
-//       console.log(doc.data());
-//     });
-//     // if (!snapshotDoctorID.empty) {
-//     //   // return false;
-//     //   snapshotDoctorID.forEach((doc)=>{
+const checkTimeTableExist = async (DoctorID, Date) => {
+  try {
+    const DateArr = [];
+    const timetableRef = db.collection("TimeTable");
+    const query = await timetableRef.where("Date", "==", Date).get();
+    query.forEach((doc) => {
+      DateArr.push(doc.data());
+    });
 
-//     //   })
-//     // } else {
-//     //   return true;
-//     // }
-//   } catch (error) {
-//     return error;
-//   }
-// };
+    // const data = Object.values(DateArr).some((doc) => doc.DoctorID == DoctorID);
+    // console.log(data);
+  } catch (error) {
+    return error;
+  }
+};
 
 /////========== Read ==========/////
 const getAllTimeTable = async () => {
@@ -77,5 +70,5 @@ module.exports = {
   addTimeTable,
   deleteTimeTable,
   deleteTimeSlot,
-  // checkTimeTableExist,
+  checkTimeTableExist,
 };
