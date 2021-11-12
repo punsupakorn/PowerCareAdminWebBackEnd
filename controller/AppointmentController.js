@@ -3,17 +3,15 @@ const {
   checkTimeTableExist,
 } = require("../models/ScheduleModels");
 
-const addDoctorAppointment = async (req, res) => {
+const addDoctorAppointment = async (doctor, date, time, id) => {
   try {
-    const doctor = req.body.doctor;
-    const date = req.body.date;
-    const time = req.body.time;
-    const id = req.body.id;
-
-    for (let i = 0; i < date.length; i++) {
-      const element = date[i];
-      await addTimeTable(doctor, element, time, id);
-    }
+    let data = checkTimeTableExist(id, date);
+    console.log(data);
+    return data;
+    // for (let i = 0; i < date.length; i++) {
+    //   const element = date[i];
+    //   await addTimeTable(doctor, element, time, id);
+    // }
   } catch (error) {
     return error;
   }

@@ -52,4 +52,9 @@ app.use("/Postpone", postponeRouter);
 app.use("/ConfirmCancel", confirmCancelRouter);
 app.use("/SummaryPostpone", summaryPostpone);
 
+const PORT = 8000;
+app.listen(PORT, () => {
+  console.log(`server is running on port: ${PORT}`);
+});
+
 module.exports = app;
