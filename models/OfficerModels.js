@@ -274,6 +274,7 @@ const checkEmailExist = async (Email) => {
     }
     return true;
   } catch (error) {
+    console.log(error);
     return error;
   }
 };

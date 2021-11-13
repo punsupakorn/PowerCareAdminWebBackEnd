@@ -14,6 +14,7 @@ router.post("/", async (req, res) => {
   const time = req.body.time;
   const id = req.body.id;
   let result = await addDoctorAppointment(doctor, date, time, id);
+  console.log("Response Appointment : ", result);
   res.send(result);
 });
 

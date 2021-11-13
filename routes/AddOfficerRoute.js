@@ -8,7 +8,7 @@ const {
 router.get("/:Email", async (req, res) => {
   const { Email } = req.params;
   let result = await checkEmailExist(Email);
-  // console.log("result :", result);
+  console.log("Check Email Exist :", result);
   res.send(result);
 });
 
@@ -28,6 +28,7 @@ router.post("/", async (req, res) => {
     Email,
     Password
   );
+  console.log("Response AddOfficer: ", result);
   res.send(result);
 });
 
