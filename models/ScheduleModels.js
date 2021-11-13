@@ -13,18 +13,17 @@ const addTimeTable = async (doctor, element, time, id) => {
   });
 };
 
-const checkTimeTableExist = async (id, date) => {
+const checkTimeTableExist = async (id, element) => {
   try {
+    const resultDate = new Date(element).toLocaleDateString();
     const arr = [];
-    const getDate = await db
-      .collection("TimeTable")
-      .where("Date", "==", date)
-      .get();
-    getDate.forEach((data) => {
-      arr.push(data.data());
+    const timetableRef = db.collection("TimeTable");
+    const query = await timetableRef.where("Date", "==", resultDate).get();
+    query.forEach((doc) => {
+      arr.push(doc.data());
     });
-    return arr;
-    // arr.filter((doc)=>doc.DoctorID == id)
+    const data = !Object.values(arr).some((data) => data.DoctorID == id);
+    return data;
   } catch (error) {
     return error;
   }
