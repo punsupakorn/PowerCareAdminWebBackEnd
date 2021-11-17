@@ -23,6 +23,7 @@ var workingDetailRouter = require("./routes/WorkingDetailRoute");
 var postponeRouter = require("./routes/PostponeRoute");
 var confirmCancelRouter = require("./routes/ConfirmCancelRoute");
 var summaryPostpone = require("./routes/SummaryPostponeRoute");
+var workingDoctorRouter = require("./routes/WorkingDoctorRoute");
 
 var app = express();
 
@@ -51,6 +52,7 @@ app.use("/WorkingDetail", workingDetailRouter);
 app.use("/Postpone", postponeRouter);
 app.use("/ConfirmCancel", confirmCancelRouter);
 app.use("/SummaryPostpone", summaryPostpone);
+app.use("/WorkingDoctor", workingDoctorRouter);
 
 // const PORT = 8000;
 // app.listen(PORT, () => {

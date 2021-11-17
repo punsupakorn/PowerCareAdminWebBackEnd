@@ -97,6 +97,16 @@ const getTime = async (TimeTableID) => {
   }
 };
 
+const getWorkingDoctor = async (DoctorID) => {
+  const WorkingArr = [];
+  const appointmentRef = db.collection("Appointment");
+  const query = await appointmentRef.where("DoctorID", "==", DoctorID).get();
+  query.forEach((data) => {
+    WorkingArr.push(data.data());
+  });
+  return WorkingArr;
+};
+
 ///// update appointment /////
 const editAppointment = async (
   AppointmentID,
@@ -146,4 +156,5 @@ module.exports = {
   editAppointment,
   getDateChange,
   getTime,
+  getWorkingDoctor
 };
