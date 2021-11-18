@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const { getDoctorProfile } = require("../controller/test");
+const {
+  getDoctorProfile,
+} = require("../controller/HomescreenDoctorController");
 
 router.get("/:documentid", async (req, res) => {
   const { documentid } = req.params;
