@@ -25,6 +25,7 @@ var confirmCancelRouter = require("./routes/ConfirmCancelRoute");
 var summaryPostponeRouter = require("./routes/SummaryPostponeRoute");
 var workingDoctorRouter = require("./routes/WorkingDoctorRoute");
 var selectWorkingRouter = require("./routes/SelectWorkingRoute");
+var homescreenDoctorRouter = require("./routes/HomescreenDoctorRoute");
 
 var app = express();
 
@@ -55,7 +56,7 @@ app.use("/ConfirmCancel", confirmCancelRouter);
 app.use("/SummaryPostpone", summaryPostponeRouter);
 app.use("/WorkingDoctor", workingDoctorRouter);
 app.use("/SelectWorking", selectWorkingRouter);
-
+app.use("/HomescreenDoctor", homescreenDoctorRouter);
 // const PORT = 8000;
 // app.listen(PORT, () => {
 //   console.log(`server is running on port: ${PORT}`);
