@@ -1,6 +1,6 @@
 // const express = require("express");
 // const { json } = require("express");
-const e = require("express");
+const express = require("express");
 const { db, auth } = require("../config/firebase_config");
 
 /////========== Create ==========/////
