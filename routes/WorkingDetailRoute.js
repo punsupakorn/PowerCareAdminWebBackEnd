@@ -17,7 +17,8 @@ router.get("/:UserID", async (req, res) => {
 router.post("/", async (req, res) => {
   const { AppointmentID } = req.body;
   let result = await getTreatmentWithAppointmentID(AppointmentID);
-  res.send(result)
+  console.log("result : ", result);
+  res.send(result);
 });
 
 module.exports = router;
