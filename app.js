@@ -27,6 +27,7 @@ var workingDoctorRouter = require("./routes/WorkingDoctorRoute");
 var selectWorkingRouter = require("./routes/SelectWorkingRoute");
 var homescreenDoctorRouter = require("./routes/HomescreenDoctorRoute");
 var workingDetailDoctorRouter = require("./routes/WorkingDetailDoctorRoute");
+var usersummaryRouter = require("./routes/UserSummaryRoute");
 
 var app = express();
 
@@ -59,6 +60,7 @@ app.use("/WorkingDoctor", workingDoctorRouter);
 app.use("/SelectWorking", selectWorkingRouter);
 app.use("/HomescreenDoctor", homescreenDoctorRouter);
 app.use("/WorkingDetailDoctor", workingDetailDoctorRouter);
+app.use("/UserSummary", usersummaryRouter);
 
 // const PORT = 8000;
 // app.listen(PORT, () => {
