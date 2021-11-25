@@ -1,6 +1,7 @@
 const e = require("express");
 const { app } = require("firebase-admin");
 const { db, FieldValue } = require("../config/firebase_config");
+const { PushVdo, client } = require("./../linepushmessage/linepushmessage")
 
 ///// get appointment /////
 const getAllAppointment = async () => {
@@ -30,6 +31,17 @@ const getAllAppointment = async () => {
     return error;
   }
 };
+
+//line push message
+let Status = "รอพบแพทย์";
+client.pushMessage(uid.data.userId, PushVdo(userName, Initial_Symtoms, Date, Time, DoctorName, Status, meetingLink))
+  .then(() => {
+    console.log('done');
+  })
+  .catch((err) => {
+    // error handling
+    console.log("send message error: ", err);
+  });
 
 const getAppointment = async (UserID) => {
   try {
