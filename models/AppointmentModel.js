@@ -33,15 +33,15 @@ const getAllAppointment = async () => {
 };
 
 //line push message
-let Status = "รอพบแพทย์";
-client.pushMessage(uid.data.userId, PushVdo(userName, Initial_Symtoms, Date, Time, DoctorName, Status, meetingLink))
-  .then(() => {
-    console.log('done');
-  })
-  .catch((err) => {
-    // error handling
-    console.log("send message error: ", err);
-  });
+// let Status = "รอพบแพทย์";
+// client.pushMessage(uid.data.userId, PushVdo(userName, Initial_Symtoms, Date, Time, DoctorName, Status, meetingLink))
+//   .then(() => {
+//     console.log('done');
+//   })
+//   .catch((err) => {
+//     // error handling
+//     console.log("send message error: ", err);
+//   });
 
 const getAppointment = async (UserID) => {
   try {

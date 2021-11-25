@@ -225,7 +225,7 @@ const PushVdo = (userName, initial_Symptoms, Date, time, doctorName,status, meet
 // client
 //   .pushMessage(
 //     "U3469bee1028c5f4c2e16199bb53ec5b7",
-//     PushVdo("PushVdo")
+//     PushVdo("Confirm Appointment")
 //   )
 //   .then(() => {
 //     console.log("done");
