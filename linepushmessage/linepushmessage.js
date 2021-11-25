@@ -221,18 +221,18 @@ const PushVdo = (userName, initial_Symptoms, Date, time, doctorName,status, meet
   ]
 };
 
-console.log("start");
-client
-  .pushMessage(
-    "U3469bee1028c5f4c2e16199bb53ec5b7",
-    PushVdo("PushVdo")
-  )
-  .then(() => {
-    console.log("done");
-  })
-  .catch((err) => {
-    // error handling
-    console.log(err);
-  });
+// console.log("start");
+// client
+//   .pushMessage(
+//     "U3469bee1028c5f4c2e16199bb53ec5b7",
+//     PushVdo("PushVdo")
+//   )
+//   .then(() => {
+//     console.log("done");
+//   })
+//   .catch((err) => {
+//     // error handling
+//     console.log(err);
+//   });
 
 module.exports = { client, PushVdo };
