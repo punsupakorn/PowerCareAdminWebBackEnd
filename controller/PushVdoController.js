@@ -17,15 +17,15 @@ const pushMessage = async (userId, appointmentId, meetingLink) => {
       Status: "รอพบแพทย์",
       MeetingLink: meetingLink,
     });
-    // client
-    //   .pushMessage(lineuserid, confirmAppointment())
-    //   .then(() => {
-    //     console.log("done");
-    //   })
-    //   .catch((err) => {
-    //     // error handling
-    //     console.log("send message error: ", err);
-    //   });
+    client
+      .pushMessage(lineuserid, confirmAppointment())
+      .then(() => {
+        console.log("done");
+      })
+      .catch((err) => {
+        // error handling
+        console.log("send message error: ", err);
+      });
   } catch (error) {
     return false;
   }
