@@ -1,3 +1,5 @@
+const e = require("express");
+const { app } = require("firebase-admin");
 const { db, FieldValue } = require("../config/firebase_config");
 
 ///// get appointment /////
@@ -38,6 +40,25 @@ const getAppointment = async (UserID) => {
       arr.push(doc.data());
     });
     return arr;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const getAppointmentWithAppointmentID = async (appointmentid) => {
+  try {
+    const appointmentRef = db.collection("Appointment").doc(appointmentid);
+    const doc = await appointmentRef.get();
+    if (doc.exists) {
+      return doc.data();
+    } else {
+      return false;
+    }
+    // const arr = [];
+    // snapshot.forEach((doc) => {
+    //   arr.push(doc.data());
+    // });
+    // return arr;
   } catch (error) {
     console.log(error);
   }
@@ -156,5 +177,6 @@ module.exports = {
   editAppointment,
   getDateChange,
   getTime,
-  getWorkingDoctor
+  getWorkingDoctor,
+  getAppointmentWithAppointmentID,
 };

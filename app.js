@@ -28,8 +28,11 @@ var selectWorkingRouter = require("./routes/SelectWorkingRoute");
 var homescreenDoctorRouter = require("./routes/HomescreenDoctorRoute");
 var workingDetailDoctorRouter = require("./routes/WorkingDetailDoctorRoute");
 var usersummaryRouter = require("./routes/UserSummaryRoute");
+var pushVdoRouter = require("./routes/PushVdoRoute");
 
 var app = express();
+var server = require("http").Server(app);
+const io = require("socket.io")(server);
 
 app.use(cors());
 app.use(logger("dev"));
@@ -61,6 +64,7 @@ app.use("/SelectWorking", selectWorkingRouter);
 app.use("/HomescreenDoctor", homescreenDoctorRouter);
 app.use("/WorkingDetailDoctor", workingDetailDoctorRouter);
 app.use("/UserSummary", usersummaryRouter);
+app.use("/PushVdo", pushVdoRouter);
 
 // const PORT = 8000;
 // app.listen(PORT, () => {
