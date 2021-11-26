@@ -4,7 +4,7 @@ const {
   getMedicine,
   createMedicine,
   removeMedicine,
-  updatMedicine,
+  updateMedicine,
 } = require("../controller/ManageMedicineController");
 
 router.post("/", async (req, res) => {
@@ -23,12 +23,8 @@ router.get("/:medicineid", async (req, res) => {
 });
 
 router.put("/", async (req, res) => {
-  const MedicineID = req.body.MedicineID;
-  const Name = req.body.MedicineName;
-  const Description = req.body.MedicineDescription;
-  const Price = req.body.Price;
-  const Type = req.body.Type;
-  let result = await updatMedicine(MedicineID, Name, Description, Price, Type);
+  const { MedicineID, Name, Description, Price, Type } = req.body;
+  let result = await updateMedicine(MedicineID, Name, Description, Price, Type);
   res.send(result);
 });
 

@@ -2,7 +2,7 @@ const {
   addMedicine,
   getMedicine,
   deleteMedicine,
-  updatMedicine,
+  updateMedicine
 } = require("../models/MedicineModel");
 
 const createMedicine = async (Name, Description, Price, Type) => {
@@ -22,4 +22,4 @@ const removeMedicine = async (req, res) => {
   } catch (error) {}
 };
 
-module.exports = { getMedicine, createMedicine, removeMedicine, updatMedicine };
+module.exports = { getMedicine, createMedicine, removeMedicine, updateMedicine };

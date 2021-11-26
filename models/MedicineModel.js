@@ -52,7 +52,8 @@ const getMedicine = async (MedicineID) => {
 
 const updateMedicine = async (MedicineID, Name, Description, Price, Type) => {
   try {
-    await db.collection("Medicine").doc(MedicineID).update({
+    const medicineRef = db.collection("Medicine").doc(MedicineID);
+    await medicineRef.update({
       MedicineName: Name,
       MedicineDescription: Description,
       Price: Price,
