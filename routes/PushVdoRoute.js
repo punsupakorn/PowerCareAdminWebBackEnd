@@ -24,7 +24,7 @@ router.get("/user/:userid", async (req, res) => {
 router.post("/", async (req, res) => {
   const { userId, appointmentId, meetingLink } = req.body;
   let result = await pushMessage(userId, appointmentId, meetingLink);
-  console.log(result);
+  // console.log("result :",result);
   res.send(result);
 });
 
