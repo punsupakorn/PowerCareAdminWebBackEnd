@@ -3,8 +3,15 @@ const router = express.Router();
 const { addTreatment } = require("../controller/UserSummaryController");
 
 router.post("/", async (req, res) => {
-  const { AppointmentID, Description, MedicineQuantity, TotalPrice, UserID,OtherService } =
-    req.body;
+  const {
+    AppointmentID,
+    Description,
+    MedicineQuantity,
+    TotalPrice,
+    UserID,
+    OtherServiceDescription,
+    OtherServicePrice,
+  } = req.body;
 
   let result = await addTreatment(
     AppointmentID,
@@ -12,9 +19,10 @@ router.post("/", async (req, res) => {
     MedicineQuantity,
     TotalPrice,
     UserID,
-    OtherService
+    OtherServiceDescription,
+    OtherServicePrice
   );
   // console.log("Response AddOfficer: ", result);
-    res.send(result);
+  res.send(result);
 });
 module.exports = router;

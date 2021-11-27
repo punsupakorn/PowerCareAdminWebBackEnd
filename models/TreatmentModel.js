@@ -5,10 +5,10 @@ const addTreatment = async (
   AppointmentID,
   Description,
   MedicineQuantity,
-  // PaymentStatus,
   TotalPrice,
   UserID,
-  OtherService
+  OtherServiceDescription,
+  OtherServicePrice
 ) => {
   const treatmentRef = db.collection("Treatment").doc();
   try {
@@ -17,10 +17,10 @@ const addTreatment = async (
       AppointmentID: AppointmentID,
       Description: Description,
       MedicineQuantity: MedicineQuantity,
-      // PaymentStatus: PaymentStatus,
       TotalPrice: TotalPrice,
       UserID: UserID,
-      OtherService: OtherService,
+      OtherServiceDescription: OtherServiceDescription,
+      OtherServicePrice: OtherServicePrice,
     });
     const data = {
       TreatmentID: treatmentRef.id,
@@ -29,9 +29,16 @@ const addTreatment = async (
       MedicineQuantity: MedicineQuantity,
       TotalPrice: TotalPrice,
       UserID: UserID,
-      OtherService: OtherService,
+      OtherServiceDescription: OtherServiceDescription,
+      OtherServicePrice: OtherServicePrice,
     };
-    return data;
+
+    const appointmentRef = db.collection("Appointment").doc(AppointmentID);
+    appointmentRef.update({
+      Status: "สำเร็จ",
+    });
+
+    return true;
   } catch (error) {
     console.log(error);
     return false;
