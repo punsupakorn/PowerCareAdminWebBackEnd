@@ -25,12 +25,12 @@ const pushMessage = async (userId, appointmentId, meetingLink) => {
         lineuserid,
         PushVdo(
           result.UserName,
-          result.initial_Symptoms,
+          result.Initial_Symptoms,
           result.Date,
           result.Time,
           result.DoctorName,
           result.Status,
-          result.MeetingLink
+          meetingLink
         )
       )
       .then(() => {
