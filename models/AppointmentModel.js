@@ -10,6 +10,16 @@ const {
 } = require("./../linepushmessage/linepushmessage");
 const { status } = require("@grpc/grpc-js");
 
+const displayShortThaiDate = (date) => {
+  const result = new Date(date).toLocaleDateString("th-TH", {
+    year: "numeric",
+    month: "2-digit",
+    day: "numeric",
+    // weekday: "short",
+  });
+  return result;
+};
+
 ///// get appointment /////
 const getAllAppointment = async () => {
   try {
@@ -149,16 +159,6 @@ const getWorkingDoctor = async (DoctorID) => {
 
 ///// update appointment /////
 const editAppointment = async (
-  // AppointmentID,
-  // OldTimeTableID,
-  // NewTimeTableID,
-  // Date,
-  // OldTime,
-  // NewTime,
-  // userName,
-  // doctorName,
-  // symptom,
-  // accessToken
   AppointmentID,
   OldTimeTableID,
   NewTimeTableID,
@@ -169,30 +169,43 @@ const editAppointment = async (
   userID
 ) => {
   const appointmentRef = db.collection("Appointment").doc(AppointmentID);
-  const doc = await appointmentRef.get();
-  const user = doc.data();
-  const lineid = user.LineUserId;
   const oldtimetableRef = db.collection("TimeTable").doc(OldTimeTableID);
   const newtimetableRef = db.collection("TimeTable").doc(NewTimeTableID);
   const userRef = db.collection("User").doc(userID);
-  const appointmentdoc = await appointmentRef.get();
   const userdoc = await userRef.get();
+  const appointmentdoc = await appointmentRef.get();
   const appointment = appointmentdoc.data();
   const user = userdoc.data();
+  const lineid = user.LineUserId;
+  const thainewdate = displayShortThaiDate(Date);
+  const thaiolddate = displayShortThaiDate(olddate);
 
   try {
-    
-    // await appointmentRef.update({
-    //   Time: NewTime,
-    //   Date: Date,
-    //   TimeTableID: NewTimeTableID,
-    // });
+    await appointmentRef.update({
+      Time: NewTime,
+      Date: Date,
+      TimeTableID: NewTimeTableID,
+    });
 
-    // await newtimetableRef.update({
-    //   Time: FieldValue.arrayRemove(NewTime),
-    // });
+    await newtimetableRef.update({
+      Time: FieldValue.arrayRemove(NewTime),
+    });
 
     await oldtimetableRef.update({ Time: FieldValue.arrayUnion(OldTime) });
+    client.pushMessage(
+      lineid,
+      SummaryPostpone(
+        appointment.UserName,
+        appointment.Initial_Symptoms,
+        thainewdate,
+        thaiolddate,
+        OldTime,
+        NewTime,
+        appointment.DoctorName,
+        appointment.Status
+      )
+    );
+    return true;
   } catch (error) {
     return error;
   }
@@ -200,26 +213,26 @@ const editAppointment = async (
 
 ///// delete appointment /////
 const deleteAppointment = async (AppointmentID, TimeTableID, Time) => {
+  let status = "ยกเลิกนัดสำเร็จ";
+  const appointmentRef = db.collection("Appointment").doc(AppointmentID);
+  const doc = await appointmentRef.get();
+  const appointment = doc.data();
   try {
-    await db.collection("Appointment").doc(AppointmentID).delete();
     const timtableRef = db.collection("TimeTable").doc(TimeTableID);
-    await timtableRef.update({ Time: FieldValue.arrayUnion(Time) });
+    await db.collection("Appointment").doc(AppointmentID).delete();
 
-    let status = "ยกเลิกนัดสำเร็จ";
-    const appointmentRef = db.collection("Appointment").doc(AppointmentID);
-    const doc = await appointmentRef.get();
-    const appointment = doc.data();
-    // client.pushMessage(appointment.LineUserId,)
-    client.pushMessage(
-      appointment.LineUserId,
-      ConfirmCancel(
-        appointment.UserName,
-        appointment.Initial_Symptoms,
-        appointment.Date,
-        appointment.Time,
-        appointment.DoctorName,
-        status
-      )
+    await timtableRef.update({ Time: FieldValue.arrayUnion(Time) });
+    client
+      .pushMessage(
+        appointment.LineUserId,
+        ConfirmCancel(
+          appointment.UserName,
+          appointment.Initial_Symptoms,
+          appointment.Date,
+          appointment.Time,
+          appointment.DoctorName,
+          status
+        )
       )
       .then(() => {
         console.log("done");
@@ -227,8 +240,8 @@ const deleteAppointment = async (AppointmentID, TimeTableID, Time) => {
       .catch((err) => {
         // error handling
         console.log("send message error: ", err);
-      }
-    );
+      });
+    return true;
   } catch (error) {
     console.log(error);
     return error;
