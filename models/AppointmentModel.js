@@ -1,7 +1,7 @@
 const e = require("express");
 const { app } = require("firebase-admin");
 const { db, FieldValue } = require("../config/firebase_config");
-const { PushVdo, client } = require("./../linepushmessage/linepushmessage")
+const { PushVdo,SummaryPostpone, client } = require("./../linepushmessage/linepushmessage")
 
 ///// get appointment /////
 const getAllAppointment = async () => {
@@ -147,11 +147,21 @@ const editAppointment = async (
   NewTimeTableID,
   Date,
   OldTime,
-  NewTime
+  NewTime,
+  userName,
+  doctorName,
+  symptom,
+  accessToken
 ) => {
   const appointmentRef = db.collection("Appointment").doc(AppointmentID);
   const oldtimetableRef = db.collection("TimeTable").doc(OldTimeTableID);
   const newtimetableRef = db.collection("TimeTable").doc(NewTimeTableID);
+  const uid = await axios.get(`https://api.line.me/v2/profile`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
   try {
     await appointmentRef.update({
       Time: NewTime,
@@ -164,6 +174,28 @@ const editAppointment = async (
     });
 
     await oldtimetableRef.update({ Time: FieldValue.arrayUnion(OldTime) });
+    let status = "เลื่อนนัดสำเร็จ";
+    await client
+      .pushMessage(
+        uid.data.userId,
+        SummaryPostpone(
+          userName,
+          symptom,
+          newthaidate,
+          OldTime,
+          NewTime,
+          oldthaidate,
+          doctorName,
+          status
+        )
+      )
+      .then(() => {
+        console.log("done");
+      })
+      .catch((err) => {
+        // error handling
+        console.log("send message error: ", err);
+      });
   } catch (error) {
     return error;
   }
