@@ -169,6 +169,9 @@ const editAppointment = async (
   userID
 ) => {
   const appointmentRef = db.collection("Appointment").doc(AppointmentID);
+  const doc = await appointmentRef.get();
+  const user = doc.data();
+  const lineid = user.LineUserId;
   const oldtimetableRef = db.collection("TimeTable").doc(OldTimeTableID);
   const newtimetableRef = db.collection("TimeTable").doc(NewTimeTableID);
   const userRef = db.collection("User").doc(userID);
@@ -178,39 +181,18 @@ const editAppointment = async (
   const user = userdoc.data();
 
   try {
-    await appointmentRef.update({
-      Time: NewTime,
-      Date: Date,
-      TimeTableID: NewTimeTableID,
-    });
+    
+    // await appointmentRef.update({
+    //   Time: NewTime,
+    //   Date: Date,
+    //   TimeTableID: NewTimeTableID,
+    // });
 
-    await newtimetableRef.update({
-      Time: FieldValue.arrayRemove(NewTime),
-    });
+    // await newtimetableRef.update({
+    //   Time: FieldValue.arrayRemove(NewTime),
+    // });
 
     await oldtimetableRef.update({ Time: FieldValue.arrayUnion(OldTime) });
-    let status = "เลื่อนนัดสำเร็จ";
-    await client
-      .pushMessage(
-        user.LineUserId,
-        SummaryPostpone(
-          appointment.UserName,
-          appointment.Initial_Symptoms,
-          Date,
-          OldTime,
-          NewTime,
-          appointment.DoctorName,
-          status,
-          olddate
-        )
-      )
-      .then(() => {
-        console.log("done");
-      })
-      .catch((err) => {
-        // error handling
-        console.log("send message error: ", err);
-      });
   } catch (error) {
     return error;
   }
