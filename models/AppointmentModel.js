@@ -3,10 +3,12 @@ const axios = require("axios");
 const { app } = require("firebase-admin");
 const { db, FieldValue } = require("../config/firebase_config");
 const {
+  ConfirmCancel,
   PushVdo,
   SummaryPostpone,
   client,
 } = require("./../linepushmessage/linepushmessage");
+const { status } = require("@grpc/grpc-js");
 
 ///// get appointment /////
 const getAllAppointment = async () => {
@@ -199,7 +201,7 @@ const editAppointment = async (
           NewTime,
           appointment.DoctorName,
           status,
-          olddate,
+          olddate
         )
       )
       .then(() => {
@@ -220,6 +222,31 @@ const deleteAppointment = async (AppointmentID, TimeTableID, Time) => {
     await db.collection("Appointment").doc(AppointmentID).delete();
     const timtableRef = db.collection("TimeTable").doc(TimeTableID);
     await timtableRef.update({ Time: FieldValue.arrayUnion(Time) });
+
+    let status = "ยกเลิกนัดสำเร็จ";
+    const appointmentRef = db.collection("Appointment").doc(AppointmentID);
+    const doc = await appointmentRef.get();
+    const appointment = doc.data();
+    // client.pushMessage(appointment.LineUserId,)
+    client.pushMessage(
+      appointment.LineUserId,
+      ConfirmCancel(
+        appointment.UserName,
+        appointment.Initial_Symptoms,
+        appointment.Date,
+        appointment.Time,
+        appointment.DoctorName,
+        status
+      )
+      )
+      .then(() => {
+        console.log("done");
+      })
+      .catch((err) => {
+        // error handling
+        console.log("send message error: ", err);
+      }
+    );
   } catch (error) {
     console.log(error);
     return error;
