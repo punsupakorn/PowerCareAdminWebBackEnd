@@ -10,10 +10,8 @@ router.put("/", async (req, res) => {
     Date,
     OldTime,
     NewTime,
-    userName,
-    doctorName,
-    symptom,
-    accessToken
+    olddate,
+    userID,
   } = req.body;
   let result = await editAppointment(
     AppointmentID,
@@ -22,10 +20,8 @@ router.put("/", async (req, res) => {
     Date,
     OldTime,
     NewTime,
-    userName,
-    doctorName,
-    symptom,
-    accessToken
+    olddate,
+    userID
   );
 
   res.send(result);

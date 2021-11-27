@@ -393,7 +393,7 @@ const Treatment = (
   ];
 };
 
-const SummaryPostpone = (userName, symptom, Date, OldTime, NewTime, doctorName, status) => {
+const SummaryPostpone = (userName, symptom, Date,olddate, OldTime, NewTime, doctorName, status) => {
   return [
     {
           type: "flex",

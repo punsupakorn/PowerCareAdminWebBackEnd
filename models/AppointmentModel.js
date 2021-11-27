@@ -2,7 +2,11 @@ const e = require("express");
 const axios = require("axios");
 const { app } = require("firebase-admin");
 const { db, FieldValue } = require("../config/firebase_config");
-const { PushVdo,SummaryPostpone, client } = require("./../linepushmessage/linepushmessage")
+const {
+  PushVdo,
+  SummaryPostpone,
+  client,
+} = require("./../linepushmessage/linepushmessage");
 
 ///// get appointment /////
 const getAllAppointment = async () => {
@@ -143,26 +147,34 @@ const getWorkingDoctor = async (DoctorID) => {
 
 ///// update appointment /////
 const editAppointment = async (
+  // AppointmentID,
+  // OldTimeTableID,
+  // NewTimeTableID,
+  // Date,
+  // OldTime,
+  // NewTime,
+  // userName,
+  // doctorName,
+  // symptom,
+  // accessToken
   AppointmentID,
   OldTimeTableID,
   NewTimeTableID,
   Date,
   OldTime,
   NewTime,
-  userName,
-  doctorName,
-  symptom,
-  accessToken
+  olddate,
+  userID
 ) => {
   const appointmentRef = db.collection("Appointment").doc(AppointmentID);
   const oldtimetableRef = db.collection("TimeTable").doc(OldTimeTableID);
   const newtimetableRef = db.collection("TimeTable").doc(NewTimeTableID);
-  const uid = await axios.get(`https://api.line.me/v2/profile`, {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
+  const userRef = db.collection("User").doc(userID);
+  const appointmentdoc = await appointmentRef.get();
+  const userdoc = await userRef.get();
+  const appointment = appointmentdoc.data();
+  const user = userdoc.data();
+
   try {
     await appointmentRef.update({
       Time: NewTime,
@@ -178,16 +190,16 @@ const editAppointment = async (
     let status = "เลื่อนนัดสำเร็จ";
     await client
       .pushMessage(
-        uid.data.userId,
+        user.LineUserId,
         SummaryPostpone(
-          userName,
-          symptom,
-          newthaidate,
+          appointment.UserName,
+          appointment.Initial_Symptoms,
+          Date,
           OldTime,
           NewTime,
-          oldthaidate,
-          doctorName,
-          status
+          appointment.DoctorName,
+          status,
+          olddate,
         )
       )
       .then(() => {
