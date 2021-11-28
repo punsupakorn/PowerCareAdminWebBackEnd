@@ -34,8 +34,9 @@ const addTreatment = async (
     };
 
     const appointmentRef = db.collection("Appointment").doc(AppointmentID);
-    appointmentRef.update({
+    await appointmentRef.update({
       Status: "สำเร็จ",
+      TreatmentID: treatmentRef.id,
     });
 
     return true;
@@ -61,4 +62,24 @@ const getTreatmentWithAppointmentID = async (appointmentid) => {
   }
 };
 
-module.exports = { addTreatment, getTreatmentWithAppointmentID };
+const getTreatment = async (treatmentid) => {
+  // console.log(treatmentid);
+  const treatmentRef = db.collection("Treatment").doc(treatmentid);
+  const doc = await treatmentRef.get();
+  if (!doc.exists) {
+    return false;
+  } else {
+    return doc.data();
+  }
+  // try {
+  //   if (!doc.exists) {
+  //     return false;
+  //   } else {
+  //     return doc.data();
+  //   }
+  // } catch (error) {
+  //   console.log(error);
+  // }
+};
+
+module.exports = { addTreatment, getTreatmentWithAppointmentID, getTreatment };
