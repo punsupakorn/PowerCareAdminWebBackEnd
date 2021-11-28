@@ -230,6 +230,9 @@ const PushVdo = (
 };
 
 const Treatment = (Date, time, medicine, otherserviceprice, TotalPrice) => {
+  // medicine.map((medicine)=>(
+
+  // ))
   return [
     {
       type: "flex",
