@@ -30,6 +30,7 @@ var workingDetailDoctorRouter = require("./routes/WorkingDetailDoctorRoute");
 var usersummaryRouter = require("./routes/UserSummaryRoute");
 var pushVdoRouter = require("./routes/PushVdoRoute");
 var summaryDoctorRouter = require("./routes/SummaryDoctorRoute");
+var pushSummaryRouter = require("./routes/PushSummaryRoute");
 
 var app = express();
 var server = require("http").Server(app);
@@ -67,6 +68,7 @@ app.use("/WorkingDetailDoctor", workingDetailDoctorRouter);
 app.use("/UserSummary", usersummaryRouter);
 app.use("/PushVdo", pushVdoRouter);
 app.use("/SummaryDoctor", summaryDoctorRouter);
+app.use("/PushSummary", pushSummaryRouter);
 
 // const PORT = 8000;
 // app.listen(PORT, () => {
