@@ -230,9 +230,8 @@ const PushVdo = (
 };
 
 const Treatment = (Date, time, medicine, otherserviceprice, TotalPrice) => {
-  // medicine.map((medicine)=>(
-
-  // ))
+  let totalmedicine = medicine.map((med) => med.Price * med.quantity);
+  let result = totalmedicine.reduce((a, b) => a + b, 0);
   return [
     {
       type: "flex",
@@ -297,37 +296,59 @@ const Treatment = (Date, time, medicine, otherserviceprice, TotalPrice) => {
                 },
               ],
             },
+            // {
+            //   type: "box",
+            //   layout: "vertical",
+            //   spacing: "md",
+            //   contents: [
+            //     {
+            //       type: "box",
+            //       layout: "baseline",
+            //       contents: [
+            //         {
+            //           type: "text",
+            //           text: `${medicine.MedicineName}`,
+            //           weight: "bold",
+            //           size: "md",
+            //           margin: "sm",
+            //           contents: [],
+            //         },
+            //         {
+            //           type: "text",
+            //           text: `${medicine.quantity}`,
+            //           color: "#AAAAAA",
+            //           align: "center",
+            //           contents: [],
+            //         },
+            //         {
+            //           type: "text",
+            //           text: `${medicine.Price}`,
+            //           align: "end",
+            //           contents: [],
+            //         },
+            //       ],
+            //     },
+            //   ],
+            // },
+            {
+              type: "separator",
+            },
             {
               type: "box",
-              layout: "vertical",
-              spacing: "md",
+              layout: "baseline",
               contents: [
                 {
-                  type: "box",
-                  layout: "baseline",
-                  contents: [
-                    {
-                      type: "text",
-                      text: `${medicine.MedicineName}`,
-                      weight: "bold",
-                      size: "md",
-                      margin: "sm",
-                      contents: [],
-                    },
-                    {
-                      type: "text",
-                      text: `${medicine.quantity}`,
-                      color: "#AAAAAA",
-                      align: "center",
-                      contents: [],
-                    },
-                    {
-                      type: "text",
-                      text: `${medicine.Price}`,
-                      align: "end",
-                      contents: [],
-                    },
-                  ],
+                  type: "text",
+                  text: "ค่ายารวม",
+                  weight: "bold",
+                  margin: "sm",
+                  contents: [],
+                },
+                {
+                  type: "text",
+                  text: `${result}`,
+                  align: "end",
+                  contents: [],
                 },
               ],
             },
